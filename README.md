@@ -8,16 +8,16 @@ Based on
 
 ### Usages
 
-| \*    | a:s | a:x | a:y | a:z | a:xy | a:yz | a:zx | a:xyz |
+| \*    | b:s | b:x | b:y | b:z | b:xy | b:yz | b:zx | b:xyz |
 | ----- | --- | --- | --- | --- | ---- | ---- | ---- | ----- |
-| b:s   | s   | x   | y   | z   | xy   | yz   | zx   | xyz   |
-| b:x   | x   | -1  | -xy | zx  | y    | xyz  | -z   | -yz   |
-| b:y   | y   | xy  | -1  | -yz | -x   | z    | xyz  | -zx   |
-| b:z   | z   | -zx | yz  | -1  | xyz  | -y   | x    | -xy   |
-| b:xy  | xy  | -y  | x   | xyz | -1   | xz   | yz   | -z    |
-| b:yz  | yz  | xyz | -z  | y   | -xz  | -1   | -xy  | -x    |
-| b:zx  | zx  | z   | xyz | -x  | -yz  | xy   | -1   | -y    |
-| b:xyz | xyz | -yz | -zx | -xy | -z   | -x   | -y   | -1    |
+| a:s   | 1   | x   | y   | z   | xy   | yz   | zx   | xyz   |
+| a:x   | x   | 1   | xy  | -zx | y    | xyz  | -z   | yz    |
+| a:y   | y   | -xy | 1   | yz  | -x   | z    | xyz  | zx    |
+| a:z   | z   | zx  | -yz | 1   | xyz  | -y   | x    | xy    |
+| a:xy  | xy  | -y  | x   | xyz | -1   | -zx  | yz   | -z    |
+| a:yz  | yz  | xyz | -z  | y   | zx   | -1   | -xy  | -x    |
+| a:zx  | zx  | z   | xyz | -x  | -yz  | xy   | -1   | -y    |
+| a:xyz | xyz | yz  | zx  | xy  | -z   | -x   | -y   | -1    |
 
 ### Workflow
 
