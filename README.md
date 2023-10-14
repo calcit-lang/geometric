@@ -4,6 +4,7 @@ Thanks to tutorials:
 
 - [A Swift Introduction to Geometric Algebra](https://www.youtube.com/watch?v=60z_hpEAtD8&pp=ygUSZ2VvbWV0cmljIGFsZ2VicmEg)
 - [What is the Inverse of a Vector?](https://mattferraro.dev/posts/geometric-algebra)
+- [Let's remove Quaternions from every 3D Engine](https://marctenbosch.com/quaternions/)
 
 ### Usages
 
@@ -20,6 +21,7 @@ Values:
 Functions:
 
 - `ga3:as-v3 a`
+- `ga3:as-v3-list a`
 - `ga3:from-v3 a`
 
 - `ga3:scalar? a`
@@ -35,6 +37,8 @@ Functions:
 - `ga3:add a b`
 - `ga3:sub a b`
 - `ga3:multiply a b`
+- `ga3:close? a b`
+- `ga3:apply-rotor a r`
 
 ### Workflow
 

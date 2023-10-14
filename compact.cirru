@@ -14,6 +14,14 @@
                 tag-match b $ 
                   :ga3 bs bx by bz bxy byz bzx bxyz
                   :: :ga3 (&+ as bs) (&+ ax bx) (&+ ay by) (&+ az bz) (&+ axy bxy) (&+ ayz byz) (&+ azx bzx) (&+ axyz bxyz)
+        |ga3:apply-rotor $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defn ga3:apply-rotor (a rotor)
+              let
+                  r0 $ ga3:normalize rotor
+                ga3:multiply
+                  ga3:multiply (ga3:conjugate r0) a
+                  , r0
         |ga3:as-v3 $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn ga3:as-v3 (a)
@@ -26,6 +34,27 @@
                   assert "\"zx field is 0" $ &= 0 zx
                   assert "\"xyz field is 0" $ &= 0 xyz
                   :: :v3 x y z
+        |ga3:as-v3-list $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defn ga3:as-v3-list (a)
+              tag-match a $ 
+                :ga3 s x y z xy yz zx xyz
+                do
+                  assert "\"s field is 0" $ &= 0 s
+                  assert "\"xy field is 0" $ &= 0 xy
+                  assert "\"yz field is 0" $ &= 0 yz
+                  assert "\"zx field is 0" $ &= 0 zx
+                  assert "\"xyz field is 0" $ &= 0 xyz
+                  [] x y z
+        |ga3:close? $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defn ga3:close? (a b)
+              let
+                  d $ ga3:sub a b
+                  l $ ga3:length d
+                  e 0.000000000000001
+                and (< l e)
+                  < (negate e) l
         |ga3:conjugate $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn ga3:conjugate (a)
@@ -157,11 +186,11 @@
           :code $ quote
             defn abs (x)
               if (< x 0) (negate x) x
-        |almost1? $ %{} :CodeEntry (:doc |)
+        |close? $ %{} :CodeEntry (:doc |)
           :code $ quote
-            defn almost1? (x)
+            defn close? (x y)
               <
-                abs $ - 1 x
+                abs $ - y x
                 , 0.000000000000001
         |main! $ %{} :CodeEntry (:doc |)
           :code $ quote
@@ -175,8 +204,8 @@
             defn reload! () (run-tests) (println "\"reloaded.")
         |run-tests $ %{} :CodeEntry (:doc |)
           :code $ quote
-            defn run-tests () $ testing "\"create values"
-              let
+            defn run-tests ()
+              testing "\"create values" $ let
                   a $ ga3:from-v3 (:: :v3 0 0 0)
                   b $ ga3:from-v3 (:: :v3 1 2 3)
                 is $ = a ga3:zero
@@ -202,9 +231,10 @@
                     vu $ ga3:multiply v u
                   is $ = true
                     ga3:scalar? $ ga3:add uv vu
-                  is $ = true
-                    almost1? $ ga3:length
-                      ga3:normalize $ ga3:from-v3 (:: :v3 4 5 6)
+                  is $ close?
+                    ga3:length $ ga3:normalize
+                      ga3:from-v3 $ :: :v3 4 5 6
+                    , 1
                 is $ =
                   ga3:scale
                     ga3:from-v3 $ :: :v3 1 2 3
@@ -212,8 +242,22 @@
                   ga3:from-v3 $ :: :v3 4 8 12
                 is $ = true
                   ga3:v3? $ ga3:from-v3 (:: :v3 4 8 12)
+              testing "\"rotor"
+                is $ =
+                  ga3:apply-rotor
+                    ga3:from-v3 $ :: :v3 1 0 0
+                    ga3:from-v3 $ :: :v3 0 1 0
+                  ga3:from-v3 $ :: :v3 -1 0 0
+                is $ ga3:close?
+                  ga3:apply-rotor
+                    ga3:from-v3 $ :: :v3 1 0 0
+                    ga3:from-v3 $ :: :v3
+                      * 0.5 $ sqrt 2
+                      * 0.5 $ sqrt 2
+                      , 0
+                  ga3:from-v3 $ :: :v3 0 1 0
       :ns $ %{} :CodeEntry (:doc |)
         :code $ quote
           ns geometric.test $ :require
             calcit-test.core :refer $ deftest testing is *quit-on-failure?
-            geometric.core :refer $ ga3:add ga3:zero ga3:identity ga3:sub ga3:length ga3:multiply ga3:conjugate ga3:normalize ga3:scale ga3:scalar? ga3:v3? ga3:from-v3 ga3:as-v3
+            geometric.core :refer $ ga3:add ga3:zero ga3:identity ga3:sub ga3:length ga3:multiply ga3:conjugate ga3:normalize ga3:scale ga3:scalar? ga3:v3? ga3:from-v3 ga3:as-v3 ga3:apply-rotor ga3:close?
