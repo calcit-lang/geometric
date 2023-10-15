@@ -1,6 +1,6 @@
 
 {} (:package |geometric)
-  :configs $ {} (:init-fn |geometric.test/main!) (:reload-fn |geometric.test/reload!) (:version |0.0.1)
+  :configs $ {} (:init-fn |geometric.test/main!) (:reload-fn |geometric.test/reload!) (:version |0.0.2)
     :modules $ [] |calcit-test/
   :entries $ {}
   :files $ {}
@@ -67,6 +67,13 @@
               tag-match v3 $ 
                 :v3 x y z
                 :: :ga3 0 x y z 0 0 0 0
+        |ga3:from-v3-list $ %{} :CodeEntry (:doc "|convert from `[] x y z` to Geometric Algebra 3D tuple")
+          :code $ quote
+            defn ga3:from-v3-list (v3)
+              assert "\"list of 3 numbers" $ and (list? v3)
+                &= 3 $ count v3
+                every? v3 number?
+              :: :ga3 0 (nth v3 0) (nth v3 1) (nth v3 2) 0 0 0 0
         |ga3:identity $ %{} :CodeEntry (:doc |)
           :code $ quote
             def ga3:identity $ :: :ga3 1 0 0 0 0 0 0 0
@@ -242,6 +249,14 @@
                   ga3:from-v3 $ :: :v3 4 8 12
                 is $ = true
                   ga3:v3? $ ga3:from-v3 (:: :v3 4 8 12)
+              testing "\"convert"
+                is $ =
+                  ga3:from-v3-list $ [] 1 2 3
+                  ga3:from-v3 $ :: :v3 1 2 3
+                let
+                    d $ :: :ga3 0 2 3 4 0 0 0 0
+                  is $ = (ga3:as-v3 d) (:: :v3 2 3 4)
+                  is $ = (ga3:as-v3-list d) ([] 2 3 4)
               testing "\"rotor"
                 is $ =
                   ga3:apply-rotor
@@ -260,4 +275,4 @@
         :code $ quote
           ns geometric.test $ :require
             calcit-test.core :refer $ deftest testing is *quit-on-failure?
-            geometric.core :refer $ ga3:add ga3:zero ga3:identity ga3:sub ga3:length ga3:multiply ga3:conjugate ga3:normalize ga3:scale ga3:scalar? ga3:v3? ga3:from-v3 ga3:as-v3 ga3:apply-rotor ga3:close?
+            geometric.core :refer $ ga3:add ga3:zero ga3:identity ga3:sub ga3:length ga3:multiply ga3:conjugate ga3:normalize ga3:scale ga3:scalar? ga3:v3? ga3:from-v3 ga3:as-v3 ga3:apply-rotor ga3:close? ga3:from-v3-list ga3:as-v3-list

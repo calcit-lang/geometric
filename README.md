@@ -23,6 +23,7 @@ Functions:
 - `ga3:as-v3 a`
 - `ga3:as-v3-list a`
 - `ga3:from-v3 a`
+- `ga3:from-v3-list a`
 
 - `ga3:scalar? a`
 - `ga3:v3? a`
