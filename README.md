@@ -39,7 +39,7 @@ Functions:
 - `ga3:sub a b`
 - `ga3:multiply a b`
 - `ga3:close? a b`
-- `ga3:apply-rotor a r`
+- `ga3:reflect a r`
 
 ### Workflow
 

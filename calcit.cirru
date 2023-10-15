@@ -1,11 +1,53 @@
 
 {} (:package |geometric)
-  :configs $ {} (:expose-port 6011) (:init-fn |geometric.test/main!) (:port 6001) (:reload-fn |geometric.test/reload!) (:version |0.0.2)
+  :configs $ {} (:expose-port 6011) (:init-fn |geometric.test/main!) (:port 6001) (:reload-fn |geometric.test/reload!) (:version |0.0.3)
     :modules $ [] |calcit-test/
   :entries $ {}
   :files $ {}
     |geometric.core $ %{} :FileEntry
       :defs $ {}
+        |abs $ %{} :CodeEntry (:doc |)
+          :code $ %{} :Expr (:at 1697298827718) (:by |u0)
+            :data $ {}
+              |T $ %{} :Leaf (:at 1697298829067) (:by |u0) (:text |defn)
+              |b $ %{} :Leaf (:at 1697372896373) (:by |u0) (:text |abs)
+              |h $ %{} :Expr (:at 1697298827718) (:by |u0)
+                :data $ {}
+                  |T $ %{} :Leaf (:at 1697298830182) (:by |u0) (:text |x)
+              |l $ %{} :Expr (:at 1697298831860) (:by |u0)
+                :data $ {}
+                  |T $ %{} :Leaf (:at 1697298833960) (:by |u0) (:text |if)
+                  |b $ %{} :Expr (:at 1697298834177) (:by |u0)
+                    :data $ {}
+                      |T $ %{} :Leaf (:at 1697298834446) (:by |u0) (:text |<)
+                      |b $ %{} :Leaf (:at 1697298836068) (:by |u0) (:text |x)
+                      |h $ %{} :Leaf (:at 1697298836521) (:by |u0) (:text |0)
+                  |h $ %{} :Expr (:at 1697298837590) (:by |u0)
+                    :data $ {}
+                      |T $ %{} :Leaf (:at 1697298838830) (:by |u0) (:text |negate)
+                      |b $ %{} :Leaf (:at 1697298839597) (:by |u0) (:text |x)
+                  |l $ %{} :Leaf (:at 1697298840323) (:by |u0) (:text |x)
+        |close? $ %{} :CodeEntry (:doc |)
+          :code $ %{} :Expr (:at 1697298793441) (:by |u0)
+            :data $ {}
+              |T $ %{} :Leaf (:at 1697298794870) (:by |u0) (:text |defn)
+              |b $ %{} :Leaf (:at 1697372852304) (:by |u0) (:text |close?)
+              |h $ %{} :Expr (:at 1697298793441) (:by |u0)
+                :data $ {}
+                  |T $ %{} :Leaf (:at 1697298795967) (:by |u0) (:text |x)
+                  |b $ %{} :Leaf (:at 1697309063165) (:by |u0) (:text |y)
+              |l $ %{} :Expr (:at 1697298808293) (:by |u0)
+                :data $ {}
+                  |D $ %{} :Leaf (:at 1697298810522) (:by |u0) (:text |<)
+                  |T $ %{} :Expr (:at 1697298796515) (:by |u0)
+                    :data $ {}
+                      |T $ %{} :Leaf (:at 1697298800238) (:by |u0) (:text |abs)
+                      |b $ %{} :Expr (:at 1697298804113) (:by |u0)
+                        :data $ {}
+                          |D $ %{} :Leaf (:at 1697298806281) (:by |u0) (:text |-)
+                          |L $ %{} :Leaf (:at 1697309065065) (:by |u0) (:text |y)
+                          |T $ %{} :Leaf (:at 1697298801997) (:by |u0) (:text |x)
+                  |b $ %{} :Leaf (:at 1697298848790) (:by |u0) (:text |0.000000000000001)
         |ga3:add $ %{} :CodeEntry (:doc |)
           :code $ %{} :Expr (:at 1693764018607) (:by |u0)
             :data $ {}
@@ -93,39 +135,6 @@
                                       |T $ %{} :Leaf (:at 1697294274416) (:by |u0) (:text |&+)
                                       |b $ %{} :Leaf (:at 1697296358996) (:by |u0) (:text |axyz)
                                       |h $ %{} :Leaf (:at 1697294311175) (:by |u0) (:text |bxyz)
-        |ga3:apply-rotor $ %{} :CodeEntry (:doc |)
-          :code $ %{} :Expr (:at 1697308335240) (:by |u0)
-            :data $ {}
-              |T $ %{} :Leaf (:at 1697308335240) (:by |u0) (:text |defn)
-              |b $ %{} :Leaf (:at 1697308335240) (:by |u0) (:text |ga3:apply-rotor)
-              |h $ %{} :Expr (:at 1697308335240) (:by |u0)
-                :data $ {}
-                  |T $ %{} :Leaf (:at 1697308339054) (:by |u0) (:text |a)
-                  |b $ %{} :Leaf (:at 1697308341433) (:by |u0) (:text |rotor)
-              |l $ %{} :Expr (:at 1697308374939) (:by |u0)
-                :data $ {}
-                  |D $ %{} :Leaf (:at 1697308375661) (:by |u0) (:text |let)
-                  |L $ %{} :Expr (:at 1697308376174) (:by |u0)
-                    :data $ {}
-                      |T $ %{} :Expr (:at 1697308376325) (:by |u0)
-                        :data $ {}
-                          |T $ %{} :Leaf (:at 1697308380568) (:by |u0) (:text |r0)
-                          |b $ %{} :Expr (:at 1697308383844) (:by |u0)
-                            :data $ {}
-                              |T $ %{} :Leaf (:at 1697308387964) (:by |u0) (:text |ga3:normalize)
-                              |b $ %{} :Leaf (:at 1697308389921) (:by |u0) (:text |rotor)
-                  |T $ %{} :Expr (:at 1697308393517) (:by |u0)
-                    :data $ {}
-                      |D $ %{} :Leaf (:at 1697308395229) (:by |u0) (:text |ga3:multiply)
-                      |T $ %{} :Expr (:at 1697308342278) (:by |u0)
-                        :data $ {}
-                          |T $ %{} :Leaf (:at 1697308349861) (:by |u0) (:text |ga3:multiply)
-                          |X $ %{} :Expr (:at 1697308356675) (:by |u0)
-                            :data $ {}
-                              |T $ %{} :Leaf (:at 1697308361116) (:by |u0) (:text |ga3:conjugate)
-                              |b $ %{} :Leaf (:at 1697308391863) (:by |u0) (:text |r0)
-                          |b $ %{} :Leaf (:at 1697308351359) (:by |u0) (:text |a)
-                      |b $ %{} :Leaf (:at 1697308398365) (:by |u0) (:text |r0)
         |ga3:as-v3 $ %{} :CodeEntry (:doc |)
           :code $ %{} :Expr (:at 1697293580121) (:by |u0)
             :data $ {}
@@ -160,7 +169,7 @@
                               |b $ %{} :Leaf (:at 1697294354499) (:by |u0) (:text "|\"s field is 0")
                               |h $ %{} :Expr (:at 1697294354499) (:by |u0)
                                 :data $ {}
-                                  |T $ %{} :Leaf (:at 1697294354499) (:by |u0) (:text |&=)
+                                  |T $ %{} :Leaf (:at 1697372841959) (:by |u0) (:text |close?)
                                   |b $ %{} :Leaf (:at 1697294354499) (:by |u0) (:text |0)
                                   |h $ %{} :Leaf (:at 1697294358081) (:by |u0) (:text |s)
                           |q $ %{} :Expr (:at 1697294354499) (:by |u0)
@@ -169,7 +178,7 @@
                               |b $ %{} :Leaf (:at 1697294379802) (:by |u0) (:text "|\"xy field is 0")
                               |h $ %{} :Expr (:at 1697294354499) (:by |u0)
                                 :data $ {}
-                                  |T $ %{} :Leaf (:at 1697294354499) (:by |u0) (:text |&=)
+                                  |T $ %{} :Leaf (:at 1697372857106) (:by |u0) (:text |close?)
                                   |b $ %{} :Leaf (:at 1697294354499) (:by |u0) (:text |0)
                                   |h $ %{} :Leaf (:at 1697294382133) (:by |u0) (:text |xy)
                           |s $ %{} :Expr (:at 1697294354499) (:by |u0)
@@ -178,7 +187,7 @@
                               |b $ %{} :Leaf (:at 1697294384183) (:by |u0) (:text "|\"yz field is 0")
                               |h $ %{} :Expr (:at 1697294354499) (:by |u0)
                                 :data $ {}
-                                  |T $ %{} :Leaf (:at 1697294354499) (:by |u0) (:text |&=)
+                                  |T $ %{} :Leaf (:at 1697372859532) (:by |u0) (:text |close?)
                                   |b $ %{} :Leaf (:at 1697294354499) (:by |u0) (:text |0)
                                   |h $ %{} :Leaf (:at 1697294386328) (:by |u0) (:text |yz)
                           |t $ %{} :Expr (:at 1697294354499) (:by |u0)
@@ -187,7 +196,7 @@
                               |b $ %{} :Leaf (:at 1697294388766) (:by |u0) (:text "|\"zx field is 0")
                               |h $ %{} :Expr (:at 1697294354499) (:by |u0)
                                 :data $ {}
-                                  |T $ %{} :Leaf (:at 1697294354499) (:by |u0) (:text |&=)
+                                  |T $ %{} :Leaf (:at 1697372860909) (:by |u0) (:text |close?)
                                   |b $ %{} :Leaf (:at 1697294354499) (:by |u0) (:text |0)
                                   |h $ %{} :Leaf (:at 1697294387804) (:by |u0) (:text |zx)
                           |u $ %{} :Expr (:at 1697294392321) (:by |u0)
@@ -196,7 +205,7 @@
                               |b $ %{} :Leaf (:at 1697294395446) (:by |u0) (:text "|\"xyz field is 0")
                               |h $ %{} :Expr (:at 1697294392321) (:by |u0)
                                 :data $ {}
-                                  |T $ %{} :Leaf (:at 1697294392321) (:by |u0) (:text |&=)
+                                  |T $ %{} :Leaf (:at 1697372861929) (:by |u0) (:text |close?)
                                   |b $ %{} :Leaf (:at 1697294392321) (:by |u0) (:text |0)
                                   |h $ %{} :Leaf (:at 1697294396710) (:by |u0) (:text |xyz)
                           |v $ %{} :Expr (:at 1697294400674) (:by |u0)
@@ -1092,6 +1101,43 @@
                           |T $ %{} :Leaf (:at 1697293288888) (:by |u0) (:text |&/)
                           |b $ %{} :Leaf (:at 1697293289502) (:by |u0) (:text |1)
                           |h $ %{} :Leaf (:at 1697293289798) (:by |u0) (:text |l)
+        |ga3:reflect $ %{} :CodeEntry (:doc "|reflection formula from https://marctenbosch.com/quaternions/#h_13")
+          :code $ %{} :Expr (:at 1697308335240) (:by |u0)
+            :data $ {}
+              |T $ %{} :Leaf (:at 1697308335240) (:by |u0) (:text |defn)
+              |b $ %{} :Leaf (:at 1697372930046) (:by |u0) (:text |ga3:reflect)
+              |h $ %{} :Expr (:at 1697308335240) (:by |u0)
+                :data $ {}
+                  |T $ %{} :Leaf (:at 1697308339054) (:by |u0) (:text |a)
+                  |b $ %{} :Leaf (:at 1697308341433) (:by |u0) (:text |rotor)
+              |l $ %{} :Expr (:at 1697308374939) (:by |u0)
+                :data $ {}
+                  |D $ %{} :Leaf (:at 1697308375661) (:by |u0) (:text |let)
+                  |L $ %{} :Expr (:at 1697308376174) (:by |u0)
+                    :data $ {}
+                      |T $ %{} :Expr (:at 1697308376325) (:by |u0)
+                        :data $ {}
+                          |T $ %{} :Leaf (:at 1697308380568) (:by |u0) (:text |r0)
+                          |b $ %{} :Expr (:at 1697308383844) (:by |u0)
+                            :data $ {}
+                              |T $ %{} :Leaf (:at 1697308387964) (:by |u0) (:text |ga3:normalize)
+                              |b $ %{} :Leaf (:at 1697308389921) (:by |u0) (:text |rotor)
+                  |T $ %{} :Expr (:at 1697372916517) (:by |u0)
+                    :data $ {}
+                      |D $ %{} :Leaf (:at 1697372919674) (:by |u0) (:text |ga3:scale)
+                      |T $ %{} :Expr (:at 1697308393517) (:by |u0)
+                        :data $ {}
+                          |D $ %{} :Leaf (:at 1697308395229) (:by |u0) (:text |ga3:multiply)
+                          |T $ %{} :Expr (:at 1697308342278) (:by |u0)
+                            :data $ {}
+                              |T $ %{} :Leaf (:at 1697308349861) (:by |u0) (:text |ga3:multiply)
+                              |X $ %{} :Expr (:at 1697308356675) (:by |u0)
+                                :data $ {}
+                                  |T $ %{} :Leaf (:at 1697308361116) (:by |u0) (:text |ga3:conjugate)
+                                  |b $ %{} :Leaf (:at 1697308391863) (:by |u0) (:text |r0)
+                              |b $ %{} :Leaf (:at 1697308351359) (:by |u0) (:text |a)
+                          |b $ %{} :Leaf (:at 1697308398365) (:by |u0) (:text |r0)
+                      |b $ %{} :Leaf (:at 1697372921083) (:by |u0) (:text |-1)
         |ga3:scalar? $ %{} :CodeEntry (:doc |)
           :code $ %{} :Expr (:at 1697293780255) (:by |u0)
             :data $ {}
@@ -1412,48 +1458,6 @@
             |b $ %{} :Leaf (:at 1693763785113) (:by |u0) (:text |geometric.schema)
     |geometric.test $ %{} :FileEntry
       :defs $ {}
-        |abs $ %{} :CodeEntry (:doc |)
-          :code $ %{} :Expr (:at 1697298827718) (:by |u0)
-            :data $ {}
-              |T $ %{} :Leaf (:at 1697298829067) (:by |u0) (:text |defn)
-              |b $ %{} :Leaf (:at 1697298827718) (:by |u0) (:text |abs)
-              |h $ %{} :Expr (:at 1697298827718) (:by |u0)
-                :data $ {}
-                  |T $ %{} :Leaf (:at 1697298830182) (:by |u0) (:text |x)
-              |l $ %{} :Expr (:at 1697298831860) (:by |u0)
-                :data $ {}
-                  |T $ %{} :Leaf (:at 1697298833960) (:by |u0) (:text |if)
-                  |b $ %{} :Expr (:at 1697298834177) (:by |u0)
-                    :data $ {}
-                      |T $ %{} :Leaf (:at 1697298834446) (:by |u0) (:text |<)
-                      |b $ %{} :Leaf (:at 1697298836068) (:by |u0) (:text |x)
-                      |h $ %{} :Leaf (:at 1697298836521) (:by |u0) (:text |0)
-                  |h $ %{} :Expr (:at 1697298837590) (:by |u0)
-                    :data $ {}
-                      |T $ %{} :Leaf (:at 1697298838830) (:by |u0) (:text |negate)
-                      |b $ %{} :Leaf (:at 1697298839597) (:by |u0) (:text |x)
-                  |l $ %{} :Leaf (:at 1697298840323) (:by |u0) (:text |x)
-        |close? $ %{} :CodeEntry (:doc |)
-          :code $ %{} :Expr (:at 1697298793441) (:by |u0)
-            :data $ {}
-              |T $ %{} :Leaf (:at 1697298794870) (:by |u0) (:text |defn)
-              |b $ %{} :Leaf (:at 1697309083733) (:by |u0) (:text |close?)
-              |h $ %{} :Expr (:at 1697298793441) (:by |u0)
-                :data $ {}
-                  |T $ %{} :Leaf (:at 1697298795967) (:by |u0) (:text |x)
-                  |b $ %{} :Leaf (:at 1697309063165) (:by |u0) (:text |y)
-              |l $ %{} :Expr (:at 1697298808293) (:by |u0)
-                :data $ {}
-                  |D $ %{} :Leaf (:at 1697298810522) (:by |u0) (:text |<)
-                  |T $ %{} :Expr (:at 1697298796515) (:by |u0)
-                    :data $ {}
-                      |T $ %{} :Leaf (:at 1697298800238) (:by |u0) (:text |abs)
-                      |b $ %{} :Expr (:at 1697298804113) (:by |u0)
-                        :data $ {}
-                          |D $ %{} :Leaf (:at 1697298806281) (:by |u0) (:text |-)
-                          |L $ %{} :Leaf (:at 1697309065065) (:by |u0) (:text |y)
-                          |T $ %{} :Leaf (:at 1697298801997) (:by |u0) (:text |x)
-                  |b $ %{} :Leaf (:at 1697298848790) (:by |u0) (:text |0.000000000000001)
         |main! $ %{} :CodeEntry (:doc |)
           :code $ %{} :Expr (:at 1693766989317) (:by |u0)
             :data $ {}
@@ -1926,7 +1930,7 @@
                           |T $ %{} :Leaf (:at 1697308448249) (:by |u0) (:text |=)
                           |b $ %{} :Expr (:at 1697308464370) (:by |u0)
                             :data $ {}
-                              |T $ %{} :Leaf (:at 1697308464701) (:by |u0) (:text |ga3:apply-rotor)
+                              |T $ %{} :Leaf (:at 1697372936177) (:by |u0) (:text |ga3:reflect)
                               |b $ %{} :Expr (:at 1697308466494) (:by |u0)
                                 :data $ {}
                                   |T $ %{} :Leaf (:at 1697308469171) (:by |u0) (:text |ga3:from-v3)
@@ -1954,7 +1958,7 @@
                                 :data $ {}
                                   |T $ %{} :Leaf (:at 1697308522213) (:by |u0) (:text |::)
                                   |b $ %{} :Leaf (:at 1697308525089) (:by |u0) (:text |:v3)
-                                  |h $ %{} :Leaf (:at 1697308525707) (:by |u0) (:text |-1)
+                                  |h $ %{} :Leaf (:at 1697372963035) (:by |u0) (:text |1)
                                   |l $ %{} :Leaf (:at 1697308571378) (:by |u0) (:text |0)
                                   |o $ %{} :Leaf (:at 1697308570410) (:by |u0) (:text |0)
                   |l $ %{} :Expr (:at 1697308447045) (:by |u0)
@@ -1965,7 +1969,7 @@
                           |T $ %{} :Leaf (:at 1697309092691) (:by |u0) (:text |ga3:close?)
                           |b $ %{} :Expr (:at 1697308464370) (:by |u0)
                             :data $ {}
-                              |T $ %{} :Leaf (:at 1697308464701) (:by |u0) (:text |ga3:apply-rotor)
+                              |T $ %{} :Leaf (:at 1697372940215) (:by |u0) (:text |ga3:reflect)
                               |b $ %{} :Expr (:at 1697308466494) (:by |u0)
                                 :data $ {}
                                   |T $ %{} :Leaf (:at 1697308469171) (:by |u0) (:text |ga3:from-v3)
@@ -2008,7 +2012,7 @@
                                   |T $ %{} :Leaf (:at 1697308522213) (:by |u0) (:text |::)
                                   |b $ %{} :Leaf (:at 1697308525089) (:by |u0) (:text |:v3)
                                   |h $ %{} :Leaf (:at 1697308611726) (:by |u0) (:text |0)
-                                  |l $ %{} :Leaf (:at 1697308613112) (:by |u0) (:text |1)
+                                  |l $ %{} :Leaf (:at 1697372966106) (:by |u0) (:text |-1)
                                   |o $ %{} :Leaf (:at 1697308568634) (:by |u0) (:text |0)
       :ns $ %{} :CodeEntry (:doc |)
         :code $ %{} :Expr (:at 1693763734533) (:by |u0)
@@ -2047,9 +2051,11 @@
                         |w $ %{} :Leaf (:at 1697296085313) (:by |u0) (:text |ga3:v3?)
                         |x $ %{} :Leaf (:at 1697296092724) (:by |u0) (:text |ga3:from-v3)
                         |y $ %{} :Leaf (:at 1697296096696) (:by |u0) (:text |ga3:as-v3)
-                        |z $ %{} :Leaf (:at 1697308460306) (:by |u0) (:text |ga3:apply-rotor)
+                        |z $ %{} :Leaf (:at 1697372948640) (:by |u0) (:text |ga3:reflect)
                         |zD $ %{} :Leaf (:at 1697309096521) (:by |u0) (:text |ga3:close?)
                         |zP $ %{} :Leaf (:at 1697344565814) (:by |u0) (:text |ga3:from-v3-list)
                         |zY $ %{} :Leaf (:at 1697344726822) (:by |u0) (:text |ga3:as-v3-list)
+                        |ze $ %{} :Leaf (:at 1697372886661) (:by |u0) (:text |close?)
+                        |zj $ %{} :Leaf (:at 1697372900599) (:by |u0) (:text |abs)
   :users $ {}
     |u0 $ {} (:avatar nil) (:id |u0) (:name |chen) (:nickname |chen) (:password |d41d8cd98f00b204e9800998ecf8427e) (:theme :star-trail)

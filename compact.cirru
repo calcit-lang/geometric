@@ -1,11 +1,21 @@
 
 {} (:package |geometric)
-  :configs $ {} (:init-fn |geometric.test/main!) (:reload-fn |geometric.test/reload!) (:version |0.0.2)
+  :configs $ {} (:init-fn |geometric.test/main!) (:reload-fn |geometric.test/reload!) (:version |0.0.3)
     :modules $ [] |calcit-test/
   :entries $ {}
   :files $ {}
     |geometric.core $ %{} :FileEntry
       :defs $ {}
+        |abs $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defn abs (x)
+              if (< x 0) (negate x) x
+        |close? $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defn close? (x y)
+              <
+                abs $ - y x
+                , 0.000000000000001
         |ga3:add $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn ga3:add (a b)
@@ -14,25 +24,17 @@
                 tag-match b $ 
                   :ga3 bs bx by bz bxy byz bzx bxyz
                   :: :ga3 (&+ as bs) (&+ ax bx) (&+ ay by) (&+ az bz) (&+ axy bxy) (&+ ayz byz) (&+ azx bzx) (&+ axyz bxyz)
-        |ga3:apply-rotor $ %{} :CodeEntry (:doc |)
-          :code $ quote
-            defn ga3:apply-rotor (a rotor)
-              let
-                  r0 $ ga3:normalize rotor
-                ga3:multiply
-                  ga3:multiply (ga3:conjugate r0) a
-                  , r0
         |ga3:as-v3 $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn ga3:as-v3 (a)
               tag-match a $ 
                 :ga3 s x y z xy yz zx xyz
                 do
-                  assert "\"s field is 0" $ &= 0 s
-                  assert "\"xy field is 0" $ &= 0 xy
-                  assert "\"yz field is 0" $ &= 0 yz
-                  assert "\"zx field is 0" $ &= 0 zx
-                  assert "\"xyz field is 0" $ &= 0 xyz
+                  assert "\"s field is 0" $ close? 0 s
+                  assert "\"xy field is 0" $ close? 0 xy
+                  assert "\"yz field is 0" $ close? 0 yz
+                  assert "\"zx field is 0" $ close? 0 zx
+                  assert "\"xyz field is 0" $ close? 0 xyz
                   :: :v3 x y z
         |ga3:as-v3-list $ %{} :CodeEntry (:doc |)
           :code $ quote
@@ -150,6 +152,16 @@
               &let
                 l $ ga3:length a
                 ga3:scale a $ &/ 1 l
+        |ga3:reflect $ %{} :CodeEntry (:doc "|reflection formula from https://marctenbosch.com/quaternions/#h_13")
+          :code $ quote
+            defn ga3:reflect (a rotor)
+              let
+                  r0 $ ga3:normalize rotor
+                ga3:scale
+                  ga3:multiply
+                    ga3:multiply (ga3:conjugate r0) a
+                    , r0
+                  , -1
         |ga3:scalar? $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn ga3:scalar? (a)
@@ -189,16 +201,6 @@
         :code $ quote (ns geometric.schema)
     |geometric.test $ %{} :FileEntry
       :defs $ {}
-        |abs $ %{} :CodeEntry (:doc |)
-          :code $ quote
-            defn abs (x)
-              if (< x 0) (negate x) x
-        |close? $ %{} :CodeEntry (:doc |)
-          :code $ quote
-            defn close? (x y)
-              <
-                abs $ - y x
-                , 0.000000000000001
         |main! $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn main! ()
@@ -259,20 +261,20 @@
                   is $ = (ga3:as-v3-list d) ([] 2 3 4)
               testing "\"rotor"
                 is $ =
-                  ga3:apply-rotor
+                  ga3:reflect
                     ga3:from-v3 $ :: :v3 1 0 0
                     ga3:from-v3 $ :: :v3 0 1 0
-                  ga3:from-v3 $ :: :v3 -1 0 0
+                  ga3:from-v3 $ :: :v3 1 0 0
                 is $ ga3:close?
-                  ga3:apply-rotor
+                  ga3:reflect
                     ga3:from-v3 $ :: :v3 1 0 0
                     ga3:from-v3 $ :: :v3
                       * 0.5 $ sqrt 2
                       * 0.5 $ sqrt 2
                       , 0
-                  ga3:from-v3 $ :: :v3 0 1 0
+                  ga3:from-v3 $ :: :v3 0 -1 0
       :ns $ %{} :CodeEntry (:doc |)
         :code $ quote
           ns geometric.test $ :require
             calcit-test.core :refer $ deftest testing is *quit-on-failure?
-            geometric.core :refer $ ga3:add ga3:zero ga3:identity ga3:sub ga3:length ga3:multiply ga3:conjugate ga3:normalize ga3:scale ga3:scalar? ga3:v3? ga3:from-v3 ga3:as-v3 ga3:apply-rotor ga3:close? ga3:from-v3-list ga3:as-v3-list
+            geometric.core :refer $ ga3:add ga3:zero ga3:identity ga3:sub ga3:length ga3:multiply ga3:conjugate ga3:normalize ga3:scale ga3:scalar? ga3:v3? ga3:from-v3 ga3:as-v3 ga3:reflect ga3:close? ga3:from-v3-list ga3:as-v3-list close? abs
