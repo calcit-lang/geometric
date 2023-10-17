@@ -13,9 +13,11 @@ Representation:
 - geometric algebra 3D: `:: :ga3 s x y z xy yz zx xyz`
 - vector 3D: `:: :v3 x y z`
 
+Call `geometric.core/ga3 s x y z xy yz zx xyz` to construct a value.
+
 Values:
 
-- `ga3:identity` - `:: :ga3 1 0 0 0 0 0 0`
+- `ga3:identity` - `:: :ga3 1 0 0 0 0 0 0 0`
 - `ga3:zero` - `:: :ga3 0 0 0 0 0 0 0 0`
 
 Functions:

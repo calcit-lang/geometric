@@ -1,21 +1,44 @@
 
 {} (:package |geometric)
-  :configs $ {} (:init-fn |geometric.test/main!) (:reload-fn |geometric.test/reload!) (:version |0.0.3)
+  :configs $ {} (:init-fn |geometric.test/main!) (:reload-fn |geometric.test/reload!) (:version |0.0.4)
     :modules $ [] |calcit-test/
   :entries $ {}
   :files $ {}
     |geometric.core $ %{} :FileEntry
       :defs $ {}
-        |abs $ %{} :CodeEntry (:doc |)
+        |%ga3-class $ %{} :CodeEntry (:doc |)
           :code $ quote
-            defn abs (x)
-              if (< x 0) (negate x) x
+            defrecord! %ga3-class
+              :add $ fn (self next) (ga3:add self next)
+              :as-v3 $ fn (self) (ga3:as-v3 self)
+              :as-v3-list $ fn (self) (ga3:as-v3-list self)
+              :close $ fn (self next) (ga3:close? self next)
+              :conjugate $ fn (self) (ga3:conjugate self)
+              :length $ fn (self) (ga3:length self)
+              :length-square $ fn (self) (ga3:length-square self)
+              :multiply $ fn (self next) (ga3:multiply self next)
+              :normalize $ fn (self) (ga3:normalize self)
+              :reflect $ fn (self next) (ga3:reflect self next)
+              :scalar? $ fn (self) (ga3:scalar? self)
+              :sub $ fn (self next) (ga3:sub self next)
+              :v3? $ fn (self) (ga3:v3? self)
+        |%v3-class $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defrecord! %v3-class
+              :to-ga3 $ fn (self) (ga3:from-v3 self)
+              :to-list $ fn (self)
+                tag-match self $ 
+                  :v3 x y z
+                  [] x y z
         |close? $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn close? (x y)
               <
                 abs $ - y x
                 , 0.000000000000001
+        |ga3 $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defn ga3 (s x y z xy yz zx xyz) (%:: %ga3-class :ga3 s x y z xy yz zx xyz)
         |ga3:add $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn ga3:add (a b)
@@ -23,7 +46,7 @@
                 :ga3 as ax ay az axy ayz azx axyz
                 tag-match b $ 
                   :ga3 bs bx by bz bxy byz bzx bxyz
-                  :: :ga3 (&+ as bs) (&+ ax bx) (&+ ay by) (&+ az bz) (&+ axy bxy) (&+ ayz byz) (&+ azx bzx) (&+ axyz bxyz)
+                  %:: %ga3-class :ga3 (&+ as bs) (&+ ax bx) (&+ ay by) (&+ az bz) (&+ axy bxy) (&+ ayz byz) (&+ azx bzx) (&+ axyz bxyz)
         |ga3:as-v3 $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn ga3:as-v3 (a)
@@ -35,7 +58,7 @@
                   assert "\"yz field is 0" $ close? 0 yz
                   assert "\"zx field is 0" $ close? 0 zx
                   assert "\"xyz field is 0" $ close? 0 xyz
-                  :: :v3 x y z
+                  v3 x y z
         |ga3:as-v3-list $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn ga3:as-v3-list (a)
@@ -62,20 +85,20 @@
             defn ga3:conjugate (a)
               tag-match a $ 
                 :ga3 s x y z xy yz zx xyz
-                :: :ga3 s x y z (negate xy) (negate yz) (negate zx) (negate xyz)
+                %:: %ga3-class :ga3 s x y z (negate xy) (negate yz) (negate zx) (negate xyz)
         |ga3:from-v3 $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn ga3:from-v3 (v3)
               tag-match v3 $ 
                 :v3 x y z
-                :: :ga3 0 x y z 0 0 0 0
+                %:: %ga3-class :ga3 0 x y z 0 0 0 0
         |ga3:from-v3-list $ %{} :CodeEntry (:doc "|convert from `[] x y z` to Geometric Algebra 3D tuple")
           :code $ quote
             defn ga3:from-v3-list (v3)
               assert "\"list of 3 numbers" $ and (list? v3)
                 &= 3 $ count v3
                 every? v3 number?
-              :: :ga3 0 (nth v3 0) (nth v3 1) (nth v3 2) 0 0 0 0
+              %:: %ga3-class :ga3 0 (nth v3 0) (nth v3 1) (nth v3 2) 0 0 0 0
         |ga3:identity $ %{} :CodeEntry (:doc |)
           :code $ quote
             def ga3:identity $ :: :ga3 1 0 0 0 0 0 0 0
@@ -145,7 +168,7 @@
                         &* a:zx b:s
                         &* a:xyz b:y
                       next-xyz $ + (&* a:s b:xyz) (&* a:x b:yz) (&* a:y b:zx) (&* a:z b:xy) (&* a:xy b:z) (&* a:yz b:x) (&* a:zx b:y) (&* a:xyz b:s)
-                    :: :ga3 next-s next-x next-y next-z next-xy next-yz next-zx next-xyz
+                    %:: %ga3-class :ga3 next-s next-x next-y next-z next-xy next-yz next-zx next-xyz
         |ga3:normalize $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn ga3:normalize (a)
@@ -174,7 +197,7 @@
               assert "\"accepts number" $ number? n
               tag-match a $ 
                 :ga3 s x y z xy yz zx xyz
-                :: :ga3 (&* s n) (&* x n) (&* y n) (&* z n) (&* xy n) (&* yz n) (&* zx n) (&* xyz n)
+                %:: %ga3-class :ga3 (&* s n) (&* x n) (&* y n) (&* z n) (&* xy n) (&* yz n) (&* zx n) (&* xyz n)
         |ga3:sub $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn ga3:sub (a b)
@@ -182,7 +205,7 @@
                 :ga3 as ax ay az axy ayz azx axyz
                 tag-match b $ 
                   :ga3 bs bx by bz bxy byz bzx bxyz
-                  :: :ga3 (&- as bs) (&- ax bx) (&- ay by) (&- az bz) (&- axy bxy) (&- ayz byz) (&- azx bzx) (&- axyz bxyz)
+                  %:: %ga3-class :ga3 (&- as bs) (&- ax bx) (&- ay by) (&- az bz) (&- axy bxy) (&- ayz byz) (&- azx bzx) (&- axyz bxyz)
         |ga3:v3? $ %{} :CodeEntry (:doc |)
           :code $ quote
             defn ga3:v3? (a)
@@ -192,6 +215,9 @@
         |ga3:zero $ %{} :CodeEntry (:doc |)
           :code $ quote
             def ga3:zero $ :: :ga3 0 0 0 0 0 0 0 0
+        |v3 $ %{} :CodeEntry (:doc |)
+          :code $ quote
+            defn v3 (x y z) (%:: %v3-class :v3 x y z)
       :ns $ %{} :CodeEntry (:doc |)
         :code $ quote
           ns geometric.core $ :require (geometric.schema :as schema)
@@ -215,27 +241,27 @@
           :code $ quote
             defn run-tests ()
               testing "\"create values" $ let
-                  a $ ga3:from-v3 (:: :v3 0 0 0)
-                  b $ ga3:from-v3 (:: :v3 1 2 3)
+                  a $ ga3:from-v3 (v3 0 0 0)
+                  b $ ga3:from-v3 (v3 1 2 3)
                 is $ = a ga3:zero
-                is $ = ga3:identity (:: :ga3 1 0 0 0 0 0 0 0)
-                is $ = b (:: :ga3 0 1 2 3 0 0 0 0)
+                is $ = ga3:identity (ga3 1 0 0 0 0 0 0 0)
+                is $ = b (ga3 0 1 2 3 0 0 0 0)
                 is $ =
                   ga3:add
-                    ga3:from-v3 $ :: :v3 1 2 3
-                    ga3:from-v3 $ :: :v3 3 4 5
-                  ga3:from-v3 $ :: :v3 4 6 8
+                    ga3:from-v3 $ v3 1 2 3
+                    ga3:from-v3 $ v3 3 4 5
+                  ga3:from-v3 $ v3 4 6 8
                 is $ =
-                  ga3:add (:: :ga3 1 2 3 4 5 6 7 8) (:: :ga3 1 2 3 4 5 6 7 8)
-                  :: :ga3 2 4 6 8 10 12 14 16
+                  ga3:add (ga3 1 2 3 4 5 6 7 8) (ga3 1 2 3 4 5 6 7 8)
+                  ga3 2 4 6 8 10 12 14 16
                 is $ =
                   ga3:multiply
-                    ga3:from-v3 $ :: :v3 0 1 0
-                    ga3:from-v3 $ :: :v3 0 0 0
+                    ga3:from-v3 $ v3 0 1 0
+                    ga3:from-v3 $ v3 0 0 0
                   , ga3:zero
                 let
-                    u $ ga3:from-v3 (:: :v3 1 2 3)
-                    v $ ga3:from-v3 (:: :v3 4 5 6)
+                    u $ ga3:from-v3 (v3 1 2 3)
+                    v $ ga3:from-v3 (v3 4 5 6)
                     uv $ ga3:multiply u v
                     vu $ ga3:multiply v u
                   is $ = true
@@ -246,35 +272,50 @@
                     , 1
                 is $ =
                   ga3:scale
-                    ga3:from-v3 $ :: :v3 1 2 3
+                    ga3:from-v3 $ v3 1 2 3
                     , 4
-                  ga3:from-v3 $ :: :v3 4 8 12
+                  ga3:from-v3 $ v3 4 8 12
                 is $ = true
-                  ga3:v3? $ ga3:from-v3 (:: :v3 4 8 12)
+                  ga3:v3? $ ga3:from-v3 (v3 4 8 12)
               testing "\"convert"
                 is $ =
                   ga3:from-v3-list $ [] 1 2 3
-                  ga3:from-v3 $ :: :v3 1 2 3
+                  ga3:from-v3 $ v3 1 2 3
                 let
-                    d $ :: :ga3 0 2 3 4 0 0 0 0
-                  is $ = (ga3:as-v3 d) (:: :v3 2 3 4)
+                    d $ ga3 0 2 3 4 0 0 0 0
+                  is $ = (ga3:as-v3 d) (v3 2 3 4)
                   is $ = (ga3:as-v3-list d) ([] 2 3 4)
               testing "\"rotor"
                 is $ =
                   ga3:reflect
-                    ga3:from-v3 $ :: :v3 1 0 0
-                    ga3:from-v3 $ :: :v3 0 1 0
-                  ga3:from-v3 $ :: :v3 1 0 0
+                    ga3:from-v3 $ v3 1 0 0
+                    ga3:from-v3 $ v3 0 1 0
+                  ga3:from-v3 $ v3 1 0 0
                 is $ ga3:close?
                   ga3:reflect
-                    ga3:from-v3 $ :: :v3 1 0 0
-                    ga3:from-v3 $ :: :v3
+                    ga3:from-v3 $ v3 1 0 0
+                    ga3:from-v3 $ v3
                       * 0.5 $ sqrt 2
                       * 0.5 $ sqrt 2
                       , 0
-                  ga3:from-v3 $ :: :v3 0 -1 0
+                  ga3:from-v3 $ v3 0 -1 0
+              testing "\"add with class"
+                is $ =
+                  ga3:add
+                    ga3:from-v3 $ v3 1 2 3
+                    ga3:from-v3 $ v3 4 5 6
+                  .add
+                    .to-ga3 $ v3 1 2 3
+                    .to-ga3 $ v3 4 5 6
+                is $ =
+                  ga3:multiply
+                    ga3:from-v3 $ v3 1 2 3
+                    ga3:from-v3 $ v3 4 5 6
+                  .multiply
+                    .to-ga3 $ v3 1 2 3
+                    .to-ga3 $ v3 4 5 6
       :ns $ %{} :CodeEntry (:doc |)
         :code $ quote
           ns geometric.test $ :require
             calcit-test.core :refer $ deftest testing is *quit-on-failure?
-            geometric.core :refer $ ga3:add ga3:zero ga3:identity ga3:sub ga3:length ga3:multiply ga3:conjugate ga3:normalize ga3:scale ga3:scalar? ga3:v3? ga3:from-v3 ga3:as-v3 ga3:reflect ga3:close? ga3:from-v3-list ga3:as-v3-list close? abs
+            geometric.core :refer $ ga3:add ga3:zero ga3:identity ga3:sub ga3:length ga3:multiply ga3:conjugate ga3:normalize ga3:scale ga3:scalar? ga3:v3? ga3:from-v3 ga3:as-v3 ga3:reflect ga3:close? ga3:from-v3-list ga3:as-v3-list close? ga3 v3
