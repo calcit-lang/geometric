@@ -1,5 +1,10 @@
 ## Geometric Algerbra Arithmetic for Calcit
 
+Status: experimental. This library explores geometric algebra arithmetic and is
+not a promise of production stability. It requires Calcit 0.13.77 and
+`@calcit/procs` 0.13.77; package version 0.0.4 remains unchanged because this
+repository upgrade does not publish a new library release.
+
 Thanks to tutorials:
 
 - [A Swift Introduction to Geometric Algebra](https://www.youtube.com/watch?v=60z_hpEAtD8&pp=ygUSZ2VvbWV0cmljIGFsZ2VicmEg)
@@ -46,6 +51,19 @@ Functions:
 ### Workflow
 
 https://github.com/calcit-lang/calcit-workflow
+
+Validation uses the native test entry and the generated JavaScript entry:
+
+```bash
+corepack enable
+corepack prepare yarn@4.12.0 --activate
+caps --strict --ci
+calcit calcit.cirru --check-only
+calcit calcit.cirru
+calcit calcit.cirru js
+yarn install --immutable
+node ./main.mjs
+```
 
 ### License
 

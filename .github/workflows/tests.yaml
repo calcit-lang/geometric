@@ -6,30 +6,47 @@ on:
       - main
   pull_request: {}
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      with:
+        persist-credentials: false
 
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
       with:
         node-version: 20
-        cache: 'yarn'
+        package-manager-cache: false
 
-    - uses: supplypike/setup-bin@v3
-      with:
-        uri: 'https://github.com/calcit-lang/calcit/releases/download/0.8.9/cr'
-        name: 'cr'
-        version: '0.8.9'
+    - name: "enable Yarn"
+      run: |
+        corepack enable
+        corepack prepare yarn@4.12.0 --activate
 
-    - uses: supplypike/setup-bin@v3
-      with:
-        uri: 'https://github.com/calcit-lang/calcit/releases/download/0.8.9/caps'
-        name: 'caps'
-        version: '0.8.9'
+    - uses: calcit-lang/setup-calcit@704b3f5cd6f9ce3bd1e0c926dbdd1d181adb8180 # v1
 
-    - name: "test"
-      run: caps --ci && mode=ci cr -1
+    - name: "install modules"
+      run: caps --strict --ci
 
-    - run: cr --emit-js -1 && yarn && node ./main.mjs
+    - name: "validate Calcit"
+      run: |
+        test "$(calcit -v)" = "0.13.77"
+        calcit calcit.cirru edit format
+        git diff --exit-code -- calcit.cirru
+        calcit calcit.cirru --check-only
+        calcit calcit.cirru --warn-dyn-method --check-only
+        calcit calcit.cirru analyze check-types --summary-only --format json
+        calcit calcit.cirru analyze weak-types --only schema-dynamic,unresolved-type-slot,code-dynamic --intent unresolved --summary-only --format json
+        calcit calcit.cirru analyze deprecated --summary-only --format json
+        calcit calcit.cirru analyze quality --baseline config/calcit-quality.cirru --format json
+        calcit calcit.cirru
+
+    - name: "test JavaScript"
+      run: |
+        calcit calcit.cirru js
+        yarn install --immutable
+        node ./main.mjs
