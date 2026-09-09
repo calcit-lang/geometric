@@ -1,7 +1,7 @@
 
 {} (:about "|Machine-generated snapshot. Do not edit directly — changes will be overwritten. Use `calcit query` to inspect and `calcit edit`/`calcit tree` to modify. Run `calcit docs agents --full` first. Manual edits must follow format and schema conventions, then run `calcit edit format`.") (:package |geometric)
   :entries $ {}
-    :default $ {} (:description |) (:init-fn 'geometric.test/main!) (:mode :native) (:reload-fn 'geometric.test/reload!)
+    :default $ {} (:description |) (:init-fn 'geometric.test/main!) (:mode :native) (:reload-fn 'geometric.test/reload!) (:target :native)
       :feature-policy $ {}
       :modules $ []
       :type-slots $ {}
@@ -31,55 +31,55 @@
             deftrait Ga3Methods
               .add $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base 'geometric.core/Ga3Base
-                  :return 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+                  :return 'geometric.core/Ga3
               .as-v3 $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base
-                  :return 'geometric.core/V3Base
+                  :args $ [] 'geometric.core/Ga3
+                  :return 'geometric.core/V3
               .as-v3-list $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/Ga3
                   :return $ :: 'List 'Number
               .close $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
                   :return 'Bool
               .conjugate $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base
-                  :return 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/Ga3
+                  :return 'geometric.core/Ga3
               .length $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/Ga3
                   :return 'Number
               .length-square $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/Ga3
                   :return 'Number
               .multiply $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base 'geometric.core/Ga3Base
-                  :return 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+                  :return 'geometric.core/Ga3
               .normalize $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base
-                  :return 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/Ga3
+                  :return 'geometric.core/Ga3
               .reflect $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base 'geometric.core/Ga3Base
-                  :return 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+                  :return 'geometric.core/Ga3
               .scalar? $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/Ga3
                   :return 'Bool
               .sub $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base 'geometric.core/Ga3Base
-                  :return 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+                  :return 'geometric.core/Ga3
               .v3? $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/Ga3
                   :return 'Bool
           :examples $ []
           :schema $ :: 'Trait
@@ -116,11 +116,11 @@
             deftrait V3Methods
               .to-ga3 $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/V3Base
-                  :return 'geometric.core/Ga3Base
+                  :args $ [] 'geometric.core/V3
+                  :return 'geometric.core/Ga3
               .to-list $ :: :fn
                 {}
-                  :args $ [] 'geometric.core/V3Base
+                  :args $ [] 'geometric.core/V3
                   :return $ :: 'List 'Number
           :examples $ []
           :schema $ :: 'Trait
@@ -129,7 +129,7 @@
             defimpl V3MethodsImpl V3Methods
               .to-ga3 $ fn (self) (ga3:from-v3 self)
               .to-list $ fn (self)
-                tag-match self $
+                match self $
                   :v3 x y z
                   [] x y z
           :examples $ []
@@ -141,28 +141,32 @@
                 abs $ - y x
                 , 0.000000000000001
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Bool)
+              :args $ [] 'Number 'Number
         'ga3 $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3 (s x y z xy yz zx xyz) (%:: Ga3 :ga3 s x y z xy yz zx xyz)
           :examples $ []
           :schema $ :: 'Fn
-            {} (:return 'geometric.core/Ga3Base)
+            {} (:return 'Enum)
               :args $ [] 'Number 'Number 'Number 'Number 'Number 'Number 'Number 'Number
         'ga3:add $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:add (a b)
-              tag-match a $
+              match a $
                 :ga3 as ax ay az axy ayz azx axyz
-                tag-match b $
+                match b $
                   :ga3 bs bx by bz bxy byz bzx bxyz
                   %:: Ga3 :ga3 (&+ as bs) (&+ ax bx) (&+ ay by) (&+ az bz) (&+ axy bxy) (&+ ayz byz) (&+ azx bzx) (&+ axyz bxyz)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Enum)
+              :args $ [] 'Enum 'Enum
         'ga3:as-v3 $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:as-v3 (a)
-              tag-match a $
+              match a $
                 :ga3 s x y z xy yz zx xyz
                 do
                   assert "|s field is 0" $ close? 0 s
@@ -172,11 +176,13 @@
                   assert "|xyz field is 0" $ close? 0 xyz
                   v3 x y z
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Enum)
+              :args $ [] 'Enum
         'ga3:as-v3-list $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:as-v3-list (a)
-              tag-match a $
+              match a $
                 :ga3 s x y z xy yz zx xyz
                 do
                   assert "|s field is 0" $ &= 0 s
@@ -186,7 +192,10 @@
                   assert "|xyz field is 0" $ &= 0 xyz
                   [] x y z
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {}
+              :args $ [] 'Enum
+              :return $ :: 'List 'Number
         'ga3:close? $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:close? (a b)
@@ -197,63 +206,69 @@
                 and (< l e)
                   < (negate e) l
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Bool)
+              :args $ [] 'Enum 'Enum
         'ga3:conjugate $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:conjugate (a)
-              tag-match a $
+              match a $
                 :ga3 s x y z xy yz zx xyz
                 %:: Ga3 :ga3 s x y z (negate xy) (negate yz) (negate zx) (negate xyz)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Enum)
+              :args $ [] 'Enum
         'ga3:from-v3 $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:from-v3 (v3)
-              tag-match v3 $
+              match v3 $
                 :v3 x y z
                 %:: Ga3 :ga3 0 x y z 0 0 0 0
           :examples $ []
           :schema $ :: 'Fn
-            {} (:return 'geometric.core/Ga3Base)
-              :args $ [] 'geometric.core/V3Base
+            {} (:return 'Enum)
+              :args $ [] 'Enum
         'ga3:from-v3-list $ %{} 'CodeEntry (:doc "|convert from `[] x y z` to Geometric Algebra 3D tuple")
           :code $ quote
             defn ga3:from-v3-list (v3)
               assert "|list of 3 numbers" $ and (list? v3)
                 &= 3 $ count v3
                 every? v3 number?
-              %:: Ga3 :ga3 0
-                (nth v3 0) .unwrap
-                (nth v3 1) .unwrap
-                (nth v3 2) .unwrap
-                , 0 0 0 0
+              %:: Ga3 :ga3 0 (&list:nth v3 0) (&list:nth v3 1) (&list:nth v3 2) 0 0 0 0
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Enum)
+              :args $ [] (:: 'List 'Number)
         'ga3:identity $ %{} 'CodeEntry (:doc |)
           :code $ quote
             def ga3:identity $ %:: Ga3 :ga3 1 0 0 0 0 0 0 0
           :examples $ []
-          :schema $ :: 'geometric.core/Ga3Base
+          :schema $ :: 'Enum
         'ga3:length $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:length (a)
               sqrt $ ga3:length-square a
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Number)
+              :args $ [] 'Enum
         'ga3:length-square $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:length-square (a)
-              tag-match a $
+              match a $
                 :ga3 s x y z xy yz zx xyz
                 + (pow s 2) (pow x 2) (pow y 2) (pow z 2) (pow xy 2) (pow yz 2) (pow zx 2) (pow xyz 2)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Number)
+              :args $ [] 'Enum
         'ga3:multiply $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:multiply (a b)
-              tag-match a $
+              match a $
                 :ga3 a:s a:x a:y a:z a:xy a:yz a:zx a:xyz
-                tag-match b $
+                match b $
                   :ga3 b:s b:x b:y b:z b:xy b:yz b:zx b:xyz
                   let
                       next-s $ + (&* a:s b:s) (&* a:x b:x) (&* a:y b:y) (&* a:z b:z)
@@ -306,7 +321,9 @@
                       next-xyz $ + (&* a:s b:xyz) (&* a:x b:yz) (&* a:y b:zx) (&* a:z b:xy) (&* a:xy b:z) (&* a:yz b:x) (&* a:zx b:y) (&* a:xyz b:s)
                     %:: Ga3 :ga3 next-s next-x next-y next-z next-xy next-yz next-zx next-xyz
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Enum)
+              :args $ [] 'Enum 'Enum
         'ga3:normalize $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:normalize (a)
@@ -314,7 +331,9 @@
                 l $ ga3:length a
                 ga3:scale a $ &/ 1 l
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Enum)
+              :args $ [] 'Enum
         'ga3:reflect $ %{} 'CodeEntry (:doc "|reflection formula from https://marctenbosch.com/quaternions/#h_13")
           :code $ quote
             defn ga3:reflect (a rotor)
@@ -326,53 +345,63 @@
                     , r0
                   , -1
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Enum)
+              :args $ [] 'Enum 'Enum
         'ga3:scalar? $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:scalar? (a)
-              tag-match a $
+              match a $
                 :ga3 s x y z xy yz zx xyz
                 and (&= 0 x) (&= 0 y) (&= 0 z) (&= 0 xy) (&= 0 yz) (&= 0 zx) (&= 0 xyz)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Bool)
+              :args $ [] 'Enum
         'ga3:scale $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:scale (a n)
               assert "|accepts number" $ number? n
-              tag-match a $
+              match a $
                 :ga3 s x y z xy yz zx xyz
                 %:: Ga3 :ga3 (&* s n) (&* x n) (&* y n) (&* z n) (&* xy n) (&* yz n) (&* zx n) (&* xyz n)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Enum)
+              :args $ [] 'Enum 'Number
         'ga3:sub $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:sub (a b)
-              tag-match a $
+              match a $
                 :ga3 as ax ay az axy ayz azx axyz
-                tag-match b $
+                match b $
                   :ga3 bs bx by bz bxy byz bzx bxyz
                   %:: Ga3 :ga3 (&- as bs) (&- ax bx) (&- ay by) (&- az bz) (&- axy bxy) (&- ayz byz) (&- azx bzx) (&- axyz bxyz)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Enum)
+              :args $ [] 'Enum 'Enum
         'ga3:v3? $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn ga3:v3? (a)
-              tag-match a $
+              match a $
                 :ga3 s x y z xy yz zx xyz
                 and (&= 0 s) (&= 0 xy) (&= 0 yz) (&= 0 zx) (&= 0 xyz)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Bool)
+              :args $ [] 'Enum
         'ga3:zero $ %{} 'CodeEntry (:doc |)
           :code $ quote
             def ga3:zero $ %:: Ga3 :ga3 0 0 0 0 0 0 0 0
           :examples $ []
-          :schema $ :: 'geometric.core/Ga3Base
+          :schema $ :: 'Enum
         'v3 $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn v3 (x y z) (%:: V3 :v3 x y z)
           :examples $ []
           :schema $ :: 'Fn
-            {} (:return 'geometric.core/V3Base)
+            {} (:return 'Enum)
               :args $ [] 'Number 'Number 'Number
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote
@@ -387,30 +416,34 @@
           :code $ quote
             defn main! () $ run-tests
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Unit)
+              :args $ []
         'reload! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn reload! () (run-tests) (println |reloaded.)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Unit)
+              :args $ []
         'run-tests $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn run-tests ()
               do "|create values" $ let
                   a $ ga3:from-v3 (v3 0 0 0)
                   b $ ga3:from-v3 (v3 1 2 3)
-                is $ = a ga3:zero
-                is $ = ga3:identity (ga3 1 0 0 0 0 0 0 0)
-                is $ = b (ga3 0 1 2 3 0 0 0 0)
-                is $ =
+                is $ &= a ga3:zero
+                is $ &= ga3:identity (ga3 1 0 0 0 0 0 0 0)
+                is $ &= b (ga3 0 1 2 3 0 0 0 0)
+                is $ &=
                   ga3:add
                     ga3:from-v3 $ v3 1 2 3
                     ga3:from-v3 $ v3 3 4 5
                   ga3:from-v3 $ v3 4 6 8
-                is $ =
+                is $ &=
                   ga3:add (ga3 1 2 3 4 5 6 7 8) (ga3 1 2 3 4 5 6 7 8)
                   ga3 2 4 6 8 10 12 14 16
-                is $ =
+                is $ &=
                   ga3:multiply
                     ga3:from-v3 $ v3 0 1 0
                     ga3:from-v3 $ v3 0 0 0
@@ -420,29 +453,29 @@
                     v $ ga3:from-v3 (v3 4 5 6)
                     uv $ ga3:multiply u v
                     vu $ ga3:multiply v u
-                  is $ = true
+                  is $ &= true
                     ga3:scalar? $ ga3:add uv vu
                   is $ close?
                     ga3:length $ ga3:normalize
                       ga3:from-v3 $ :: :v3 4 5 6
                     , 1
-                is $ =
+                is $ &=
                   ga3:scale
                     ga3:from-v3 $ v3 1 2 3
                     , 4
                   ga3:from-v3 $ v3 4 8 12
-                is $ = true
+                is $ &= true
                   ga3:v3? $ ga3:from-v3 (v3 4 8 12)
               do |convert
-                is $ =
+                is $ &=
                   ga3:from-v3-list $ [] 1 2 3
                   ga3:from-v3 $ v3 1 2 3
                 let
                     d $ ga3 0 2 3 4 0 0 0 0
-                  is $ = (ga3:as-v3 d) (v3 2 3 4)
-                  is $ = (ga3:as-v3-list d) ([] 2 3 4)
+                  is $ &= (ga3:as-v3 d) (v3 2 3 4)
+                  is $ &= (ga3:as-v3-list d) ([] 2 3 4)
               do |rotor
-                is $ =
+                is $ &=
                   ga3:reflect
                     ga3:from-v3 $ v3 1 0 0
                     ga3:from-v3 $ v3 0 1 0
@@ -464,7 +497,7 @@
                 assert-traits v2 V3Methods
                 is $ any? (&methods-of v1)
                   fn (method-name)
-                    = |.to-ga3 $ str method-name
+                    &= |.to-ga3 $ str method-name
                 let
                     g1 $ &trait-call V3Methods :to-ga3 v1
                     g2 $ &trait-call V3Methods :to-ga3 v2
@@ -472,14 +505,16 @@
                   assert-traits g2 Ga3Methods
                   is $ any? (&methods-of g1)
                     fn (method-name)
-                      = |.add $ str method-name
+                      &= |.add $ str method-name
                   is $ any? (&methods-of g1)
                     fn (method-name)
-                      = |.multiply $ str method-name
-                  is $ = direct-add (&trait-call Ga3Methods :add g1 g2)
-                  is $ = direct-multiply (&trait-call Ga3Methods :multiply g1 g2)
+                      &= |.multiply $ str method-name
+                  is $ &= direct-add (&trait-call Ga3Methods :add g1 g2)
+                  is $ &= direct-multiply (&trait-call Ga3Methods :multiply g1 g2)
           :examples $ []
-          :schema $ :: 'Dynamic
+          :schema $ :: 'Fn
+            {} (:return 'Unit)
+              :args $ []
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote
           ns geometric.test $ :require
