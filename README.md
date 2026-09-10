@@ -1,8 +1,8 @@
 ## Geometric Algerbra Arithmetic for Calcit
 
 Status: experimental. This library explores geometric algebra arithmetic and is
-not a promise of production stability. It requires Calcit 0.14.5 and
-`@calcit/procs` 0.14.5. This strict-type upgrade prepares library version 0.0.5.
+not a promise of production stability. It requires Calcit 0.14.7 and
+`@calcit/procs` 0.14.7. This strict-type upgrade prepares library version 0.0.6.
 
 Thanks to tutorials:
 
