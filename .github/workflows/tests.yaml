@@ -34,7 +34,7 @@ jobs:
 
     - name: "validate Calcit"
       run: |
-        test "$(calcit -v)" = "0.14.7"
+        test "$(calcit -v)" = "0.14.10"
         calcit calcit.cirru edit format
         git diff --exit-code -- calcit.cirru
         calcit calcit.cirru --strict-types --warn-dyn-method --check-only
