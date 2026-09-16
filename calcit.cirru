@@ -3,11 +3,7 @@
   :about "|Machine-generated snapshot. Do not edit directly — changes will be overwritten. Use `calcit query` to inspect and `calcit edit`/`calcit tree` to modify. Run `calcit docs agents --contract` before mutations; use `--full` for first orientation or changed contract digest. Manual edits must follow format and schema conventions, then run `calcit edit format`."
   :package |geometric
   :entries $ {} $ :default
-    {} (:description |)
-      :init-fn 'geometric.test/main!
-      :mode :native
-      :reload-fn 'geometric.test/reload!
-      :target :native
+    {} (:description |) (:init-fn 'geometric.test/main!) (:mode :native) (:reload-fn 'geometric.test/reload!) (:target :native)
       :feature-policy $ {}
       :modules $ []
       :type-slots $ {}
@@ -82,8 +78,7 @@
             .close $ fn (self next) (ga3:close? self next)
             .conjugate $ fn (self) (ga3:conjugate self)
             .length $ fn (self) (ga3:length self)
-            .length-square $ fn (self)
-              ga3:length-square self
+            .length-square $ fn (self) (ga3:length-square self)
             .multiply $ fn (self next) (ga3:multiply self next)
             .normalize $ fn (self) (ga3:normalize self)
             .reflect $ fn (self next) (ga3:reflect self next)
