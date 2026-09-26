@@ -1,8 +1,8 @@
 ## Geometric Algebra Arithmetic for Calcit
 
 Status: experimental. This library explores geometric algebra arithmetic and is
-not a promise of production stability. Development uses Calcit 0.23.1 and
-`@calcit/procs` 0.23.1. The module version is 0.0.9 pending release validation.
+not a promise of production stability. Development uses Calcit 0.24.2 and
+`@calcit/procs` 0.24.2. The module version is 0.0.10 pending release validation.
 
 Thanks to tutorials:
 
