@@ -25,16 +25,18 @@ jobs:
     - name: "enable Yarn"
       run: |
         corepack enable
-        corepack prepare yarn@4.12.0 --activate
+        corepack prepare yarn@4.18.0 --activate
 
-    - uses: calcit-lang/setup-calcit@704b3f5cd6f9ce3bd1e0c926dbdd1d181adb8180 # v1
+    - uses: calcit-lang/setup-calcit@ca701be5a471759e442aa053cd100720bbe1f09f # v1.5
+      with:
+        tools: calcit,caps
 
     - name: "install modules"
       run: caps --strict --ci
 
     - name: "validate Calcit"
       run: |
-        test "$(calcit -v)" = "0.18.1"
+        test "$(calcit -v)" = "0.22.1"
         calcit calcit.cirru edit format
         git diff --exit-code -- calcit.cirru
         calcit calcit.cirru --strict-types --warn-dyn-method --check-only
@@ -42,11 +44,15 @@ jobs:
         calcit calcit.cirru analyze check-types --summary-only --format json
         calcit calcit.cirru analyze weak-types --only schema-dynamic,unresolved-type-slot,code-dynamic --intent unresolved --summary-only --format json
         calcit calcit.cirru analyze deprecated --summary-only --format json
-        calcit calcit.cirru analyze quality --baseline config/calcit-quality.cirru --format json
+        calcit calcit.cirru analyze dynamic-methods --summary-only --format json
+        calcit docs format-md README.md --check
+        calcit docs check-md README.md
+        calcit calcit.cirru test --require-match
         calcit calcit.cirru --strict-types --warn-dyn-method
 
     - name: "test JavaScript"
       run: |
         calcit calcit.cirru js
         yarn install --immutable
+        caps verify --toolchain
         node ./main.mjs

@@ -368,8 +368,8 @@
           :schema $ :: 'Fn $ {} (:return 'Unit)
             :args $ []
         'run-tests $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ defn run-tests ()
-            do "|create values" $ let
+          :code $ quote $ defn run-tests () "|create values"
+            let
                 a $ ga3:from-v3 $ v3 0 0 0
                 b $ ga3:from-v3 $ v3 1 2 3
               is $ &= a ga3:zero
@@ -406,7 +406,7 @@
                 ga3:from-v3 $ v3 4 8 12
               is $ &= true $ ga3:v3?
                 ga3:from-v3 $ v3 4 8 12
-            do |convert
+            , |convert
               is $ &=
                 ga3:from-v3-list $ [] 1 2 3
                 ga3:from-v3 $ v3 1 2 3
@@ -414,46 +414,50 @@
                   d $ ga3 0 2 3 4 0 0 0 0
                 is $ &= (ga3:as-v3 d) (v3 2 3 4)
                 is $ &= (ga3:as-v3-list d) ([] 2 3 4)
-            do |rotor
-              is $ &=
-                ga3:reflect
+              , |rotor
+                is $ &=
+                  ga3:reflect
+                    ga3:from-v3 $ v3 1 0 0
+                    ga3:from-v3 $ v3 0 1 0
                   ga3:from-v3 $ v3 1 0 0
-                  ga3:from-v3 $ v3 0 1 0
-                ga3:from-v3 $ v3 1 0 0
-              is $ ga3:close?
-                ga3:reflect
-                  ga3:from-v3 $ v3 1 0 0
-                  ga3:from-v3 $ v3
-                    * 0.5 $ sqrt 2
-                    * 0.5 $ sqrt 2
-                    , 0
-                ga3:from-v3 $ v3 0 -1 0
-            do |add-with-class $ let
-                v1 $ v3 1 2 3
-                v2 $ v3 4 5 6
-                direct-add $ ga3:add (ga3:from-v3 v1) (ga3:from-v3 v2)
-                direct-multiply $ ga3:multiply (ga3:from-v3 v1) (ga3:from-v3 v2)
-              assert-traits v1 V3Methods
-              assert-traits v2 V3Methods
-              is $ any? (&methods-of v1)
-                fn (method-name)
-                  &= |.to-ga3 $ str method-name
-              let
-                  g1 $ &trait-call V3Methods :to-ga3 v1
-                  g2 $ &trait-call V3Methods :to-ga3 v2
-                assert-traits g1 Ga3Methods
-                assert-traits g2 Ga3Methods
-                is $ any? (&methods-of g1)
-                  fn (method-name)
-                    &= |.add $ str method-name
-                is $ any? (&methods-of g1)
-                  fn (method-name)
-                    &= |.multiply $ str method-name
-                is $ &= direct-add $ &trait-call Ga3Methods :add g1 g2
-                is $ &= direct-multiply $ &trait-call Ga3Methods :multiply g1 g2
+                is $ ga3:close?
+                  ga3:reflect
+                    ga3:from-v3 $ v3 1 0 0
+                    ga3:from-v3 $ v3
+                      * 0.5 $ sqrt 2
+                      * 0.5 $ sqrt 2
+                      , 0
+                  ga3:from-v3 $ v3 0 -1 0
+                , |add-with-class
+                  let
+                      v1 $ v3 1 2 3
+                      v2 $ v3 4 5 6
+                      direct-add $ ga3:add (ga3:from-v3 v1) (ga3:from-v3 v2)
+                      direct-multiply $ ga3:multiply (ga3:from-v3 v1) (ga3:from-v3 v2)
+                    assert-traits v1 V3Methods
+                    assert-traits v2 V3Methods
+                    is $ any? (&methods-of v1)
+                      fn (method-name)
+                        &= |.to-ga3 $ str method-name
+                    let
+                        g1 $ &trait-call V3Methods :to-ga3 v1
+                        g2 $ &trait-call V3Methods :to-ga3 v2
+                      assert-traits g1 Ga3Methods
+                      assert-traits g2 Ga3Methods
+                      is $ any? (&methods-of g1)
+                        fn (method-name)
+                          &= |.add $ str method-name
+                      is $ any? (&methods-of g1)
+                        fn (method-name)
+                          &= |.multiply $ str method-name
+                      is $ &= direct-add $ &trait-call Ga3Methods :add g1 g2
+                      is $ &= direct-multiply $ &trait-call Ga3Methods :multiply g1 g2
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Unit)
             :args $ []
+          :tests $ [] $ %{} 'TestEntry (:name |arithmetic-and-traits)
+            :code $ quote $ run-tests
+            :tags $ #{} :unit
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns geometric.test
           :require
