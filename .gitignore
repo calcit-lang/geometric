@@ -8,3 +8,6 @@ js-out/
 node_modules
 
 example/
+dist
+.pnp.cjs
+.pnp.loader.mjs
