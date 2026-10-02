@@ -21,7 +21,7 @@
         'Ga3 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def Ga3 (impl-traits Ga3Base Ga3MethodsImpl)
           :examples $ []
-          :schema $ :: 'Enum
+          :schema $ :: 'EnumDef
         'Ga3Base $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defenum Ga3
             :ga3 'Number 'Number 'Number 'Number 'Number 'Number 'Number 'Number
@@ -90,7 +90,7 @@
         'V3 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def V3 (impl-traits V3Base V3MethodsImpl)
           :examples $ []
-          :schema $ :: 'Enum
+          :schema $ :: 'EnumDef
         'V3Base $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defenum V3 (:v3 'Number 'Number 'Number)
           :examples $ []
@@ -124,7 +124,7 @@
             :args $ [] 'Number 'Number
         'ga3 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3 (s x y z xy yz zx xyz)
-            %:: Ga3 :ga3 s x y z xy yz zx xyz
+            Ga3 :ga3 s x y z xy yz zx xyz
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Enum)
             :args $ [] 'Number 'Number 'Number 'Number 'Number 'Number 'Number 'Number
@@ -134,7 +134,7 @@
               :ga3 as ax ay az axy ayz azx axyz
               match b $
                 :ga3 bs bx by bz bxy byz bzx bxyz
-                %:: Ga3 :ga3 (&+ as bs) (&+ ax bx) (&+ ay by) (&+ az bz) (&+ axy bxy) (&+ ayz byz) (&+ azx bzx) (&+ axyz bxyz)
+                Ga3 :ga3 (&+ as bs) (&+ ax bx) (&+ ay by) (&+ az bz) (&+ axy bxy) (&+ ayz byz) (&+ azx bzx) (&+ axyz bxyz)
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Enum)
             :args $ [] 'Enum 'Enum
@@ -182,7 +182,7 @@
           :code $ quote $ defn ga3:conjugate (a)
             match a $
               :ga3 s x y z xy yz zx xyz
-              %:: Ga3 :ga3 s x y z (negate xy) (negate yz) (negate zx) (negate xyz)
+              Ga3 :ga3 s x y z (negate xy) (negate yz) (negate zx) (negate xyz)
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Enum)
             :args $ [] 'Enum
@@ -190,7 +190,7 @@
           :code $ quote $ defn ga3:from-v3 (v3)
             match v3 $
               :v3 x y z
-              %:: Ga3 :ga3 0 x y z 0 0 0 0
+              Ga3 :ga3 0 x y z 0 0 0 0
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Enum)
             :args $ [] 'Enum
@@ -200,13 +200,13 @@
             assert "|list of 3 numbers" $ and (list? v3)
               &= 3 $ count v3
               every? v3 number?
-            %:: Ga3 :ga3 0 (&list:nth v3 0) (&list:nth v3 1) (&list:nth v3 2) 0 0 0 0
+            Ga3 :ga3 0 (&list:nth v3 0) (&list:nth v3 1) (&list:nth v3 2) 0 0 0 0
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Enum)
             :args $ [] $ :: 'List 'Number
         'ga3:identity $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def ga3:identity
-            %:: Ga3 :ga3 1 0 0 0 0 0 0 0
+            Ga3 :ga3 1 0 0 0 0 0 0 0
           :examples $ []
           :schema $ :: 'Enum
         'ga3:length $ %{} 'CodeEntry (:doc |)
@@ -278,7 +278,7 @@
                       &* a:zx b:s
                       &* a:xyz b:y
                     next-xyz $ + (&* a:s b:xyz) (&* a:x b:yz) (&* a:y b:zx) (&* a:z b:xy) (&* a:xy b:z) (&* a:yz b:x) (&* a:zx b:y) (&* a:xyz b:s)
-                  %:: Ga3 :ga3 next-s next-x next-y next-z next-xy next-yz next-zx next-xyz
+                  Ga3 :ga3 next-s next-x next-y next-z next-xy next-yz next-zx next-xyz
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Enum)
             :args $ [] 'Enum 'Enum
@@ -316,7 +316,7 @@
             assert "|accepts number" $ number? n
             match a $
               :ga3 s x y z xy yz zx xyz
-              %:: Ga3 :ga3 (&* s n) (&* x n) (&* y n) (&* z n) (&* xy n) (&* yz n) (&* zx n) (&* xyz n)
+              Ga3 :ga3 (&* s n) (&* x n) (&* y n) (&* z n) (&* xy n) (&* yz n) (&* zx n) (&* xyz n)
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Enum)
             :args $ [] 'Enum 'Number
@@ -326,7 +326,7 @@
               :ga3 as ax ay az axy ayz azx axyz
               match b $
                 :ga3 bs bx by bz bxy byz bzx bxyz
-                %:: Ga3 :ga3 (&- as bs) (&- ax bx) (&- ay by) (&- az bz) (&- axy bxy) (&- ayz byz) (&- azx bzx) (&- axyz bxyz)
+                Ga3 :ga3 (&- as bs) (&- ax bx) (&- ay by) (&- az bz) (&- axy bxy) (&- ayz byz) (&- azx bzx) (&- axyz bxyz)
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Enum)
             :args $ [] 'Enum 'Enum
@@ -340,11 +340,11 @@
             :args $ [] 'Enum
         'ga3:zero $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def ga3:zero
-            %:: Ga3 :ga3 0 0 0 0 0 0 0 0
+            Ga3 :ga3 0 0 0 0 0 0 0 0
           :examples $ []
           :schema $ :: 'Enum
         'v3 $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ defn v3 (x y z) (%:: V3 :v3 x y z)
+          :code $ quote $ defn v3 (x y z) (V3 :v3 x y z)
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Enum)
             :args $ [] 'Number 'Number 'Number
