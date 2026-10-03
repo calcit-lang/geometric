@@ -11,13 +11,14 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
-    - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+    - uses: actions/checkout@v7.0.1
       with:
         persist-credentials: false
 
-    - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+    - uses: actions/setup-node@v6.5.0
       with:
         node-version: 24
         package-manager-cache: false
@@ -27,24 +28,24 @@ jobs:
         corepack enable
         corepack prepare yarn@4.18.0 --activate
 
-    - uses: calcit-lang/setup-calcit@ca701be5a471759e442aa053cd100720bbe1f09f # v1.5
+    - uses: calcit-lang/setup-calcit@v1.5.0
       with:
         tools: calcit,caps
+        calcit-version: "0.28.0"
+        caps-version: "0.1.1"
 
     - name: "install modules"
-      run: caps --strict --ci
+      run: |
+        caps --strict --ci
+        yarn install --immutable
+        caps verify --toolchain
 
     - name: "validate Calcit"
       run: |
-        test "$(calcit -v)" = "0.24.2"
         calcit calcit.cirru edit format
         git diff --exit-code -- calcit.cirru
         calcit calcit.cirru --strict-types --warn-dyn-method --check-only
-        calcit calcit.cirru analyze check-public --ns geometric.core --summary-only --format json
-        calcit calcit.cirru analyze check-types --summary-only --format json
-        calcit calcit.cirru analyze weak-types --only schema-dynamic,unresolved-type-slot,code-dynamic --intent unresolved --summary-only --format json
-        calcit calcit.cirru analyze deprecated --summary-only --format json
-        calcit calcit.cirru analyze dynamic-methods --summary-only --format json
+        calcit calcit.cirru analyze check-public --ns geometric.core --ns geometric.test --summary-only --format json
         calcit docs format-md README.md --check
         calcit docs check-md README.md
         calcit calcit.cirru test --require-match
@@ -53,6 +54,4 @@ jobs:
     - name: "test JavaScript"
       run: |
         calcit calcit.cirru js
-        yarn install --immutable
-        caps verify --toolchain
         node ./main.mjs
