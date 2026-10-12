@@ -126,7 +126,7 @@
           :code $ quote $ defn ga3 (s x y z xy yz zx xyz)
             Ga3 :ga3 s x y z xy yz zx xyz
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Enum)
+          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
             :args $ [] 'Number 'Number 'Number 'Number 'Number 'Number 'Number 'Number
         'ga3:add $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:add (a b)
@@ -136,8 +136,8 @@
                 :ga3 bs bx by bz bxy byz bzx bxyz
                 Ga3 :ga3 (&+ as bs) (&+ ax bx) (&+ ay by) (&+ az bz) (&+ axy bxy) (&+ ayz byz) (&+ azx bzx) (&+ axyz bxyz)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Enum)
-            :args $ [] 'Enum 'Enum
+          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
+            :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
         'ga3:as-v3 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:as-v3 (a)
             match a $
@@ -150,8 +150,8 @@
                 assert "|xyz field is 0" $ close? 0 xyz
                 v3 x y z
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Enum)
-            :args $ [] 'Enum
+          :schema $ :: 'Fn $ {} (:return 'geometric.core/V3)
+            :args $ [] 'geometric.core/Ga3
         'ga3:as-v3-list $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:as-v3-list (a)
             match a $
@@ -165,7 +165,7 @@
                 [] x y z
           :examples $ []
           :schema $ :: 'Fn $ {}
-            :args $ [] 'Enum
+            :args $ [] 'geometric.core/Ga3
             :return $ :: 'List 'Number
         'ga3:close? $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:close? (a b)
@@ -177,23 +177,23 @@
                 < (negate e) l
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Bool)
-            :args $ [] 'Enum 'Enum
+            :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
         'ga3:conjugate $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:conjugate (a)
             match a $
               :ga3 s x y z xy yz zx xyz
               Ga3 :ga3 s x y z (negate xy) (negate yz) (negate zx) (negate xyz)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Enum)
-            :args $ [] 'Enum
+          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
+            :args $ [] 'geometric.core/Ga3
         'ga3:from-v3 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:from-v3 (v3)
             match v3 $
               :v3 x y z
               Ga3 :ga3 0 x y z 0 0 0 0
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Enum)
-            :args $ [] 'Enum
+          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
+            :args $ [] 'geometric.core/V3
         'ga3:from-v3-list $ %{} 'CodeEntry
           :doc "|convert from `[] x y z` to Geometric Algebra 3D tuple"
           :code $ quote $ defn ga3:from-v3-list (v3)
@@ -202,19 +202,19 @@
               every? v3 number?
             Ga3 :ga3 0 (&list:nth v3 0) (&list:nth v3 1) (&list:nth v3 2) 0 0 0 0
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Enum)
+          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
             :args $ [] $ :: 'List 'Number
         'ga3:identity $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def ga3:identity
             Ga3 :ga3 1 0 0 0 0 0 0 0
           :examples $ []
-          :schema $ :: 'Enum
+          :schema $ :: 'geometric.core/Ga3
         'ga3:length $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:length (a)
             sqrt $ ga3:length-square a
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Number)
-            :args $ [] 'Enum
+            :args $ [] 'geometric.core/Ga3
         'ga3:length-square $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:length-square (a)
             match a $
@@ -222,7 +222,7 @@
               + (pow s 2) (pow x 2) (pow y 2) (pow z 2) (pow xy 2) (pow yz 2) (pow zx 2) (pow xyz 2)
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Number)
-            :args $ [] 'Enum
+            :args $ [] 'geometric.core/Ga3
         'ga3:multiply $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:multiply (a b)
             match a $
@@ -280,16 +280,16 @@
                     next-xyz $ + (&* a:s b:xyz) (&* a:x b:yz) (&* a:y b:zx) (&* a:z b:xy) (&* a:xy b:z) (&* a:yz b:x) (&* a:zx b:y) (&* a:xyz b:s)
                   Ga3 :ga3 next-s next-x next-y next-z next-xy next-yz next-zx next-xyz
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Enum)
-            :args $ [] 'Enum 'Enum
+          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
+            :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
         'ga3:normalize $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:normalize (a)
             &let
               l $ ga3:length a
               ga3:scale a $ &/ 1 l
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Enum)
-            :args $ [] 'Enum
+          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
+            :args $ [] 'geometric.core/Ga3
         'ga3:reflect $ %{} 'CodeEntry
           :doc "|reflection formula from https://marctenbosch.com/quaternions/#h_13"
           :code $ quote $ defn ga3:reflect (a rotor)
@@ -301,8 +301,8 @@
                   , r0
                 , -1
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Enum)
-            :args $ [] 'Enum 'Enum
+          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
+            :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
         'ga3:scalar? $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:scalar? (a)
             match a $
@@ -310,7 +310,7 @@
               and (&= 0 x) (&= 0 y) (&= 0 z) (&= 0 xy) (&= 0 yz) (&= 0 zx) (&= 0 xyz)
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Bool)
-            :args $ [] 'Enum
+            :args $ [] 'geometric.core/Ga3
         'ga3:scale $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:scale (a n)
             assert "|accepts number" $ number? n
@@ -318,8 +318,8 @@
               :ga3 s x y z xy yz zx xyz
               Ga3 :ga3 (&* s n) (&* x n) (&* y n) (&* z n) (&* xy n) (&* yz n) (&* zx n) (&* xyz n)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Enum)
-            :args $ [] 'Enum 'Number
+          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
+            :args $ [] 'geometric.core/Ga3 'Number
         'ga3:sub $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:sub (a b)
             match a $
@@ -328,8 +328,8 @@
                 :ga3 bs bx by bz bxy byz bzx bxyz
                 Ga3 :ga3 (&- as bs) (&- ax bx) (&- ay by) (&- az bz) (&- axy bxy) (&- ayz byz) (&- azx bzx) (&- axyz bxyz)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Enum)
-            :args $ [] 'Enum 'Enum
+          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
+            :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
         'ga3:v3? $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:v3? (a)
             match a $
@@ -337,16 +337,16 @@
               and (&= 0 s) (&= 0 xy) (&= 0 yz) (&= 0 zx) (&= 0 xyz)
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Bool)
-            :args $ [] 'Enum
+            :args $ [] 'geometric.core/Ga3
         'ga3:zero $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def ga3:zero
             Ga3 :ga3 0 0 0 0 0 0 0 0
           :examples $ []
-          :schema $ :: 'Enum
+          :schema $ :: 'geometric.core/Ga3
         'v3 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn v3 (x y z) (V3 :v3 x y z)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Enum)
+          :schema $ :: 'Fn $ {} (:return 'geometric.core/V3)
             :args $ [] 'Number 'Number 'Number
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns geometric.core
@@ -397,7 +397,7 @@
                   vu $ ga3:multiply v u
                 is $ &= true $ ga3:scalar? (ga3:add uv vu)
                 is $ close?
-                  ga3:length $ ga3:normalize $ ga3:from-v3 (:: :v3 4 5 6)
+                  ga3:length $ ga3:normalize $ ga3:from-v3 (v3 4 5 6)
                   , 1
               is $ &=
                 ga3:scale

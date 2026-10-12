@@ -1,8 +1,8 @@
 ## Geometric Algebra Arithmetic for Calcit
 
 Status: experimental. This library explores geometric algebra arithmetic and is
-not a promise of production stability. Development uses formal Calcit 0.28.0 and
-`@calcit/procs` 0.28.0. The module version remains 0.0.10; this migration does not publish a new module release.
+not a promise of production stability. Development uses formal Calcit 0.29.0 and
+`@calcit/procs` 0.29.0. The module version remains 0.0.10; this migration does not publish a new module release.
 
 Thanks to tutorials:
 
@@ -26,6 +26,10 @@ Values:
 
 内部静态构造使用具名 `Ga3 :ga3 ...` / `V3 :v3 ...`，保留现有 trait 方法和数值计算。
 两者的定义声明使用 `EnumDef`，不把 Enum 构造器标为 Enum 实例；不加入 Dynamic/unsafe 或放宽检查。
+
+公开算术和转换函数的类型区分 `geometric.core/Ga3` 与 `geometric.core/V3`，
+不再用开放的 `Enum` 擦除身份。构造、单位值和零值使用相同的具名契约；
+原有数值公式和 trait 实现不变。
 
 Functions:
 
@@ -67,20 +71,18 @@ yarn install --immutable
 caps verify --toolchain
 calcit calcit.cirru edit format
 git diff --exit-code -- calcit.cirru
-calcit calcit.cirru --strict-types --warn-dyn-method --check-only
-calcit calcit.cirru analyze check-public --ns geometric.core --ns geometric.test --summary-only
-calcit docs format-md README.md --check
-calcit docs check-md README.md
+calcit calcit.cirru --check-only --ns geometric.core --ns geometric.test --summary-only
 calcit calcit.cirru test --require-match
-calcit calcit.cirru --strict-types --warn-dyn-method
+calcit calcit.cirru
 calcit calcit.cirru js
 node ./main.mjs
 ```
 
-Preview current syntax migrations with
-`calcit calcit.cirru fix --preset surface-latest-v2 --format edn` before applying
-any proposed source edits. The former all-zero quality baseline has been removed;
-strict compilation and the public API/runtime checks remain required.
+Use strict diagnostics and `calcit analyze weak-types` to identify migration
+work, inspect the affected definitions, then apply reviewed changes through
+`calcit edit` / `calcit tree`. No compiler rewrite preset is required. The former
+all-zero quality baseline stays removed; strict compilation and the original
+native/JS arithmetic and trait assertions remain required.
 
 CI 使用精确的正式 Actions 标签、Caps 0.1.1 和不可变安装，复用既有 native/JS 算术与
 trait 断言，不添加测试框架或重复诊断统计。该模块没有前端资源部署，本次不增加 COS/CDN 配置。
