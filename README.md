@@ -1,8 +1,8 @@
 ## Geometric Algebra Arithmetic for Calcit
 
 Status: experimental. This library explores geometric algebra arithmetic and is
-not a promise of production stability. Version 0.0.11 uses formal Calcit 0.29.1 and
-`@calcit/procs` 0.29.1, publishing the strengthened Ga3/V3 contracts and corrected
+not a promise of production stability. Version 0.0.12 uses formal Calcit 0.29.3 and
+`@calcit/procs` 0.29.3, preserving the strengthened Ga3/V3 contracts and corrected
 EnumDef declarations for downstream applications.
 
 Thanks to tutorials:
