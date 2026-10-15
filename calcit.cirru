@@ -72,19 +72,59 @@
           :schema $ :: 'Trait
         'Ga3MethodsImpl $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defimpl Ga3MethodsImpl Ga3Methods
-            .add $ fn (self next) (ga3:add self next)
-            .as-v3 $ fn (self) (ga3:as-v3 self)
-            .as-v3-list $ fn (self) (ga3:as-v3-list self)
-            .close $ fn (self next) (ga3:close? self next)
-            .conjugate $ fn (self) (ga3:conjugate self)
-            .length $ fn (self) (ga3:length self)
-            .length-square $ fn (self) (ga3:length-square self)
-            .multiply $ fn (self next) (ga3:multiply self next)
-            .normalize $ fn (self) (ga3:normalize self)
-            .reflect $ fn (self next) (ga3:reflect self next)
-            .scalar? $ fn (self) (ga3:scalar? self)
-            .sub $ fn (self next) (ga3:sub self next)
-            .v3? $ fn (self) (ga3:v3? self)
+            .add $ fn (self next)
+              hint-fn $ {} (:return 'geometric.core/Ga3)
+                :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+              ga3:add self next
+            .as-v3 $ fn (self)
+              hint-fn $ {} (:return 'geometric.core/V3)
+                :args $ [] 'geometric.core/Ga3
+              ga3:as-v3 self
+            .as-v3-list $ fn (self)
+              hint-fn $ {}
+                :args $ [] 'geometric.core/Ga3
+                :return $ :: 'List 'Number
+              ga3:as-v3-list self
+            .close $ fn (self next)
+              hint-fn $ {} (:return 'Bool)
+                :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+              ga3:close? self next
+            .conjugate $ fn (self)
+              hint-fn $ {} (:return 'geometric.core/Ga3)
+                :args $ [] 'geometric.core/Ga3
+              ga3:conjugate self
+            .length $ fn (self)
+              hint-fn $ {} (:return 'Number)
+                :args $ [] 'geometric.core/Ga3
+              ga3:length self
+            .length-square $ fn (self)
+              hint-fn $ {} (:return 'Number)
+                :args $ [] 'geometric.core/Ga3
+              ga3:length-square self
+            .multiply $ fn (self next)
+              hint-fn $ {} (:return 'geometric.core/Ga3)
+                :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+              ga3:multiply self next
+            .normalize $ fn (self)
+              hint-fn $ {} (:return 'geometric.core/Ga3)
+                :args $ [] 'geometric.core/Ga3
+              ga3:normalize self
+            .reflect $ fn (self next)
+              hint-fn $ {} (:return 'geometric.core/Ga3)
+                :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+              ga3:reflect self next
+            .scalar? $ fn (self)
+              hint-fn $ {} (:return 'Bool)
+                :args $ [] 'geometric.core/Ga3
+              ga3:scalar? self
+            .sub $ fn (self next)
+              hint-fn $ {} (:return 'geometric.core/Ga3)
+                :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+              ga3:sub self next
+            .v3? $ fn (self)
+              hint-fn $ {} (:return 'Bool)
+                :args $ [] 'geometric.core/Ga3
+              ga3:v3? self
           :examples $ []
           :schema $ :: 'Impl
         'V3 $ %{} 'CodeEntry (:doc |)
@@ -107,8 +147,14 @@
           :schema $ :: 'Trait
         'V3MethodsImpl $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defimpl V3MethodsImpl V3Methods
-            .to-ga3 $ fn (self) (ga3:from-v3 self)
+            .to-ga3 $ fn (self)
+              hint-fn $ {} (:return 'geometric.core/Ga3)
+                :args $ [] 'geometric.core/V3
+              ga3:from-v3 self
             .to-list $ fn (self)
+              hint-fn $ {}
+                :args $ [] 'geometric.core/V3
+                :return $ :: 'List 'Number
               match self $
                 :v3 x y z
                 [] x y z

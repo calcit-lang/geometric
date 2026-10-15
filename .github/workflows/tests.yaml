@@ -31,7 +31,7 @@ jobs:
     - uses: calcit-lang/setup-calcit@v1.5.0
       with:
         tools: calcit,caps
-        calcit-version: "0.29.3"
+        deps-file: deps.cirru
         caps-version: "0.1.1"
 
     - name: "install modules"
@@ -45,6 +45,7 @@ jobs:
         calcit calcit.cirru edit format
         git diff --exit-code -- calcit.cirru
         calcit calcit.cirru --check-only --ns geometric.core --ns geometric.test --summary-only --format json
+        calcit calcit.cirru fix --workflow strict --verify
         calcit calcit.cirru test --require-match
         calcit calcit.cirru
 

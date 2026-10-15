@@ -1,9 +1,14 @@
 ## Geometric Algebra Arithmetic for Calcit
 
 Status: experimental. This library explores geometric algebra arithmetic and is
-not a promise of production stability. Version 0.0.12 uses formal Calcit 0.29.3 and
-`@calcit/procs` 0.29.3, preserving the strengthened Ga3/V3 contracts and corrected
+not a promise of production stability. Version 0.0.13 uses formal Calcit 0.30.0 and
+`@calcit/procs` 0.30.0, preserving the strengthened Ga3/V3 contracts and corrected
 EnumDef declarations for downstream applications.
+
+本轮保留全部算术公式、具名值、trait 名称与原断言，仅为 15 个 trait 实现函数补齐
+已有的具体参数/返回合同，使完整 strict workflow 也能验证实现。
+保留原惰性转发，避免直接引用算术函数时产生 native 初始化循环；不新增运行时转换或宏。
+库仍属实验性质，升级不代表数值算法稳定性或所有下游已完成验收。
 
 Thanks to tutorials:
 
@@ -73,6 +78,7 @@ caps verify --toolchain
 calcit calcit.cirru edit format
 git diff --exit-code -- calcit.cirru
 calcit calcit.cirru --check-only --ns geometric.core --ns geometric.test --summary-only
+calcit calcit.cirru fix --workflow strict --verify
 calcit calcit.cirru test --require-match
 calcit calcit.cirru
 calcit calcit.cirru js
