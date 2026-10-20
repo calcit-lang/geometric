@@ -44,7 +44,7 @@ jobs:
       run: |
         calcit calcit.cirru edit format
         git diff --exit-code -- calcit.cirru
-        calcit calcit.cirru --check-only --ns geometric.core --ns geometric.test --summary-only --format json
+        calcit calcit.cirru --check-only --all-defs --format json
         calcit calcit.cirru fix --workflow strict --verify
         calcit calcit.cirru test --require-match
         calcit calcit.cirru

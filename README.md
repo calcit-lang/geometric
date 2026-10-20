@@ -1,14 +1,16 @@
 ## Geometric Algebra Arithmetic for Calcit
 
 Status: experimental. This library explores geometric algebra arithmetic and is
-not a promise of production stability. Version 0.0.13 uses formal Calcit 0.30.0 and
-`@calcit/procs` 0.30.0, preserving the strengthened Ga3/V3 contracts and corrected
+not a promise of production stability. Module version 0.0.13 uses paired Calcit and
+`@calcit/procs` 0.30.1-alpha.5, preserving the strengthened Ga3/V3 contracts and corrected
 EnumDef declarations for downstream applications.
 
-本轮保留全部算术公式、具名值、trait 名称与原断言，仅为 15 个 trait 实现函数补齐
-已有的具体参数/返回合同，使完整 strict workflow 也能验证实现。
+本轮只升级配对工具链并检查全部定义，不改变算术公式、具名值、trait 名称或原断言。
+沿用此前 15 个 trait 实现函数的具体参数/返回合同，由完整 strict workflow 验证实现。
 保留原惰性转发，避免直接引用算术函数时产生 native 初始化循环；不新增运行时转换或宏。
 库仍属实验性质，升级不代表数值算法稳定性或所有下游已完成验收。
+正式 0.30.1 tag 已发布，但 CLI assets 与 npm runtime 尚未齐备，因此暂用配对 alpha.5，
+不混用其他版本运行时。本 PR 不自动发布新的模块 tag。
 
 Thanks to tutorials:
 
@@ -77,7 +79,7 @@ yarn install --immutable
 caps verify --toolchain
 calcit calcit.cirru edit format
 git diff --exit-code -- calcit.cirru
-calcit calcit.cirru --check-only --ns geometric.core --ns geometric.test --summary-only
+calcit calcit.cirru --check-only --all-defs
 calcit calcit.cirru fix --workflow strict --verify
 calcit calcit.cirru test --require-match
 calcit calcit.cirru
@@ -93,6 +95,10 @@ native/JS arithmetic and trait assertions remain required.
 
 CI 使用精确的正式 Actions 标签、Caps 0.1.1 和不可变安装，复用既有 native/JS 算术与
 trait 断言，不添加测试框架或重复诊断统计。该模块没有前端资源部署，本次不增加 COS/CDN 配置。
+
+alpha.5 验证覆盖全部 36 个定义、完整 strict workflow，以及原有 1 项附加测试套件中的
+20 个算术/trait 断言；该套件也由 native 与生成 JS 的原入口分别执行。
+未改变 Snapshot、断言、数值容差或质量预算；这些检查不构成完整的数值算法正确性证明。
 
 ### License
 
