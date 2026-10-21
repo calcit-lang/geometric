@@ -36,20 +36,24 @@ jobs:
 
     - name: "install modules"
       run: |
+        set -euo pipefail
         caps --strict --ci
         yarn install --immutable
         caps verify --toolchain
 
     - name: "validate Calcit"
       run: |
+        set -euo pipefail
         calcit calcit.cirru edit format
         git diff --exit-code -- calcit.cirru
         calcit calcit.cirru --check-only --all-defs --format json
+        calcit calcit.cirru --check-only --ns geometric.core --ns geometric.schema --summary-only --format json
         calcit calcit.cirru fix --workflow strict --verify
         calcit calcit.cirru test --require-match
         calcit calcit.cirru
 
     - name: "test JavaScript"
       run: |
+        set -euo pipefail
         calcit calcit.cirru js
         node ./main.mjs
