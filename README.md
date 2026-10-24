@@ -5,11 +5,15 @@ not a promise of production stability. Module version 0.0.14 pairs Calcit and
 `@calcit/procs` 0.30.1, preserving the strengthened Ga3/V3 contracts and corrected
 EnumDef declarations for downstream applications.
 
-本轮只升级配对工具链并检查全部定义，不改变算术公式、具名值、trait 名称或原断言。
+本轮在已发布的正式 0.30.1 配对上清理源码写法，不改变算术公式、具名值、trait 名称或原断言。
+15 处 trait 函数类型由 `:: :fn` 改为 `:: 'Fn`，参数与返回合同原样保留；
+List 长度和测试中的方法查询使用 `.len` / `.any?`。
+`&methods-of` 的成员是开放的方法反射结果，三个原测试谓词如实声明 `Dynamic -> Bool`，
+仍只对成员取字符串后比较，不强转成员或假设它已经是 String。
 沿用此前 15 个 trait 实现函数的具体参数/返回合同，由完整 strict workflow 验证实现。
 保留原惰性转发，避免直接引用算术函数时产生 native 初始化循环；不新增运行时转换或宏。
 库仍属实验性质，升级不代表数值算法稳定性或所有下游已完成验收。
-正式 0.30.1 CLI 与 npm runtime 现已齐备，本轮从配对 alpha.5 迁到正式版本。
+正式 0.30.1 CLI 与 npm runtime 保持配对，不覆盖已发布的模块 tag，也不单独抢先发版。
 消费者需同步工具链和精确模块 tag；0.0.14 的发布状态以 GitHub Releases 为准，
 不把候选或 main 当作已发布版本，也不改变旧 tag 内容。
 
@@ -97,10 +101,9 @@ native/JS arithmetic and trait assertions remain required.
 CI 使用精确的正式 Actions 标签、Caps 0.1.1 和不可变安装，复用既有 native/JS 算术与
 trait 断言，不添加测试框架或重复诊断统计。该模块没有前端资源部署，本次不增加 COS/CDN 配置。
 
-此前 alpha.5 验证覆盖全部 36 个定义、完整 strict workflow，以及原有 1 项附加测试套件中的
-20 个算术/trait 断言；该套件也由 native 与生成 JS 的原入口分别执行。
-本轮也在匹配 alpha.5 基线重复完整 strict、原附加测试和实际 JS 入口；该结果不是正式版验收。
-正式 0.30.1 的完整 CI 结果以本轮 PR 的精确提交为准。未改变 Snapshot、断言、数值容差或质量预算；
+原有 1 项附加测试调用完整算术/trait 套件；该套件也由 native 与生成 JS 的原入口分别执行。
+正式 0.30.1 的完整 CI 结果以本轮 PR 的精确提交为准。只修改上述源码写法，
+不改变断言、数值容差或质量预算，不把 trait 初始化的惰性转发改成直接引用；
 这些检查不构成完整的数值算法正确性证明，也不代表全部下游已验收。
 
 ### License

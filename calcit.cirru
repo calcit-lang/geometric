@@ -29,43 +29,43 @@
           :schema $ :: 'EnumDef
         'Ga3Methods $ %{} 'CodeEntry (:doc |)
           :code $ quote $ deftrait Ga3Methods
-            .add $ :: :fn $ {}
+            .add $ :: 'Fn $ {}
               :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
               :return 'geometric.core/Ga3
-            .as-v3 $ :: :fn $ {}
+            .as-v3 $ :: 'Fn $ {}
               :args $ [] 'geometric.core/Ga3
               :return 'geometric.core/V3
-            .as-v3-list $ :: :fn $ {}
+            .as-v3-list $ :: 'Fn $ {}
               :args $ [] 'geometric.core/Ga3
               :return $ :: 'List 'Number
-            .close $ :: :fn $ {}
+            .close $ :: 'Fn $ {}
               :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
               :return 'Bool
-            .conjugate $ :: :fn $ {}
+            .conjugate $ :: 'Fn $ {}
               :args $ [] 'geometric.core/Ga3
               :return 'geometric.core/Ga3
-            .length $ :: :fn $ {}
-              :args $ [] 'geometric.core/Ga3
-              :return 'Number
-            .length-square $ :: :fn $ {}
+            .length $ :: 'Fn $ {}
               :args $ [] 'geometric.core/Ga3
               :return 'Number
-            .multiply $ :: :fn $ {}
+            .length-square $ :: 'Fn $ {}
+              :args $ [] 'geometric.core/Ga3
+              :return 'Number
+            .multiply $ :: 'Fn $ {}
               :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
               :return 'geometric.core/Ga3
-            .normalize $ :: :fn $ {}
+            .normalize $ :: 'Fn $ {}
               :args $ [] 'geometric.core/Ga3
               :return 'geometric.core/Ga3
-            .reflect $ :: :fn $ {}
+            .reflect $ :: 'Fn $ {}
               :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
               :return 'geometric.core/Ga3
-            .scalar? $ :: :fn $ {}
+            .scalar? $ :: 'Fn $ {}
               :args $ [] 'geometric.core/Ga3
               :return 'Bool
-            .sub $ :: :fn $ {}
+            .sub $ :: 'Fn $ {}
               :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
               :return 'geometric.core/Ga3
-            .v3? $ :: :fn $ {}
+            .v3? $ :: 'Fn $ {}
               :args $ [] 'geometric.core/Ga3
               :return 'Bool
           :examples $ []
@@ -137,10 +137,10 @@
           :schema $ :: 'EnumDef
         'V3Methods $ %{} 'CodeEntry (:doc |)
           :code $ quote $ deftrait V3Methods
-            .to-ga3 $ :: :fn $ {}
+            .to-ga3 $ :: 'Fn $ {}
               :args $ [] 'geometric.core/V3
               :return 'geometric.core/Ga3
-            .to-list $ :: :fn $ {}
+            .to-list $ :: 'Fn $ {}
               :args $ [] 'geometric.core/V3
               :return $ :: 'List 'Number
           :examples $ []
@@ -244,7 +244,7 @@
           :doc "|convert from `[] x y z` to Geometric Algebra 3D tuple"
           :code $ quote $ defn ga3:from-v3-list (v3)
             assert "|list of 3 numbers" $ and (list? v3)
-              &= 3 $ count v3
+              &= 3 $ .len v3
               every? v3 number?
             Ga3 :ga3 0 (&list:nth v3 0) (&list:nth v3 1) (&list:nth v3 2) 0 0 0 0
           :examples $ []
@@ -482,19 +482,25 @@
                       direct-multiply $ ga3:multiply (ga3:from-v3 v1) (ga3:from-v3 v2)
                     assert-traits v1 V3Methods
                     assert-traits v2 V3Methods
-                    is $ any? (&methods-of v1)
+                    is $ .any? (&methods-of v1)
                       fn (method-name)
+                        hint-fn $ {} (:return 'Bool)
+                          :args $ [] 'Dynamic
                         &= |.to-ga3 $ str method-name
                     let
                         g1 $ &trait-call V3Methods :to-ga3 v1
                         g2 $ &trait-call V3Methods :to-ga3 v2
                       assert-traits g1 Ga3Methods
                       assert-traits g2 Ga3Methods
-                      is $ any? (&methods-of g1)
+                      is $ .any? (&methods-of g1)
                         fn (method-name)
+                          hint-fn $ {} (:return 'Bool)
+                            :args $ [] 'Dynamic
                           &= |.add $ str method-name
-                      is $ any? (&methods-of g1)
+                      is $ .any? (&methods-of g1)
                         fn (method-name)
+                          hint-fn $ {} (:return 'Bool)
+                            :args $ [] 'Dynamic
                           &= |.multiply $ str method-name
                       is $ &= direct-add $ &trait-call Ga3Methods :add g1 g2
                       is $ &= direct-multiply $ &trait-call Ga3Methods :multiply g1 g2
