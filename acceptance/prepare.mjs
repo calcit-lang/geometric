@@ -25,7 +25,11 @@ function normalize(node,id){
     assert.ok(['geometric.core/Ga3Methods','geometric.core/V3Methods'].includes(id));counts.fn++;n[1]="'Fn";
   }
   if(n[0]==='count'){assert.equal(id,'geometric.core/ga3:from-v3-list');assert.deepEqual(n,['count','v3']);counts.count++;n[0]='.len';}
-  if(n[0]==='any?'){assert.equal(id,'geometric.test/run-tests');assert.equal(n.length,3);counts.any++;n[0]='.any?';}
+  if(n[0]==='any?'){
+    assert.equal(id,'geometric.test/run-tests');assert.equal(n.length,3);counts.any++;n[0]='.any?';
+    assert.equal(n[2][0],'fn');assert.deepEqual(n[2][1],['method-name']);assert.equal(n[2].length,3);
+    n[2].splice(2,0,['hint-fn',['{}',[':return',"'Bool"],[':args',['[]',"'Dynamic"]]]]);
+  }
   return n;
 }
 for(const d of expected)d.code=normalize(d.code,d.id);
@@ -38,7 +42,7 @@ const args=['edit','transaction','--file','acceptance/operations.json','--format
 const preview=JSON.parse(run(...args,'--dry-run'));assert.ok(preview.scoped_revision);
 writeFileSync('acceptance/preview.json',JSON.stringify(preview,null,2));
 writeFileSync('acceptance/applied.json',run(...args,'--expect-revision',preview.scoped_revision));
-assert.deepEqual(inventory(),expected,'All36views:only15Fnannotations+4Listheads;allcontracts/FFI/algorithms/lazytraitwrappers/assertions/attachedtestunchanged');
+assert.deepEqual(inventory(),expected,'All36views:only15Fnannotations+4Listheads+3actualDynamicBoolpredicatehints;allpubliccontracts/FFI/algorithms/lazytraitwrappers/assertionoperands/attachedtestunchanged');
 assert.deepEqual(q('config'),config);
 writeFileSync('acceptance/after.json',JSON.stringify(expected,null,2));
 writeFileSync('acceptance/snapshot-blob.txt',execFileSync('git',['hash-object','calcit.cirru'],{encoding:'utf8'}));
