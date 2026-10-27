@@ -2,10 +2,15 @@
 
 Status: experimental. This library explores geometric algebra arithmetic and is
 not a promise of production stability. Module version 0.0.14 pairs Calcit and
-`@calcit/procs` 0.30.1, preserving the strengthened Ga3/V3 contracts and corrected
+`@calcit/procs` 0.31.0 in this candidate, preserving the strengthened Ga3/V3 contracts and corrected
 EnumDef declarations for downstream applications.
 
-本轮在已发布的正式 0.30.1 配对上清理源码写法，不改变算术公式、具名值、trait 名称或原断言。
+使用者影响：本候选将 CLI 与 JS runtime 同时升级到正式 0.31.0；算术公式、具名值、trait 合同和源码保持。
+模块版本不等于已发布版本；下游须协调工具链并重新生成 JS，原 native/JS 断言与完整 strict 继续验收。
+
+### 0.30.1 历史源码清理
+
+此前在已发布的正式 0.30.1 配对上清理源码写法，不改变算术公式、具名值、trait 名称或原断言。
 15 处 trait 函数类型由 `:: :fn` 改为 `:: 'Fn`，参数与返回合同原样保留；
 List 长度和测试中的方法查询使用 `.len` / `.any?`。
 `&methods-of` 的成员是开放的方法反射结果，三个原测试谓词如实声明 `Dynamic -> Bool`，
@@ -102,7 +107,7 @@ CI 使用精确的正式 Actions 标签、Caps 0.1.1 和不可变安装，复用
 trait 断言，不添加测试框架或重复诊断统计。该模块没有前端资源部署，本次不增加 COS/CDN 配置。
 
 原有 1 项附加测试调用完整算术/trait 套件；该套件也由 native 与生成 JS 的原入口分别执行。
-正式 0.30.1 的完整 CI 结果以本轮 PR 的精确提交为准。只修改上述源码写法，
+当前正式 0.31.0 的完整 CI 结果以本轮 PR 的精确提交为准；本轮只配对工具链，上述源码清理属于此前迁移。
 不改变断言、数值容差或质量预算，不把 trait 初始化的惰性转发改成直接引用；
 这些检查不构成完整的数值算法正确性证明，也不代表全部下游已验收。
 
