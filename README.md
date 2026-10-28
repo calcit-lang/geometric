@@ -1,12 +1,17 @@
 ## Geometric Algebra Arithmetic for Calcit
 
-Status: experimental. This library explores geometric algebra arithmetic and is
-not a promise of production stability. Module version 0.0.14 pairs Calcit and
-`@calcit/procs` 0.31.0 in this candidate, preserving the strengthened Ga3/V3 contracts and corrected
-EnumDef declarations for downstream applications.
+使用者影响：候选模块 **0.0.15** 配对 Calcit CLI / `@calcit/procs` **0.32.0**。
+新类型语法要求成套升级工具链并重新生成 JS；Git tag 发布前仍是候选。
+库保持实验性质，不把本轮升级视为数值算法稳定性或全部下游已验收的承诺。
 
-使用者影响：本候选将 CLI 与 JS runtime 同时升级到正式 0.31.0；算术公式、具名值、trait 合同和源码保持。
-模块版本不等于已发布版本；下游须协调工具链并重新生成 JS，原 native/JS 断言与完整 strict 继续验收。
+Candidate module **0.0.15** pairs Calcit and `@calcit/procs` **0.32.0**.
+Update both tools and regenerate JavaScript for the new type syntax. Publication
+is determined by the Git tag. This geometric algebra library remains experimental.
+
+官方 format 迁移了 33 处旧类型写法，34 个定义的语义 schema 保持一致；
+trait 和局部 hint 的表示同步迁移，Ga3/V3 身份、算术公式、惰性转发、原断言和容差不变。
+严格安装、完整 strict、原 1 项附加算术/trait 套件及 native/JS 入口通过。
+未恢复已退役的质量基线，也没有增加强转、适配层或验证脚本。
 
 ### 0.30.1 历史源码清理
 
@@ -19,7 +24,7 @@ List 长度和测试中的方法查询使用 `.len` / `.any?`。
 保留原惰性转发，避免直接引用算术函数时产生 native 初始化循环；不新增运行时转换或宏。
 库仍属实验性质，升级不代表数值算法稳定性或所有下游已完成验收。
 正式 0.30.1 CLI 与 npm runtime 保持配对，不覆盖已发布的模块 tag，也不单独抢先发版。
-消费者需同步工具链和精确模块 tag；0.0.14 的发布状态以 GitHub Releases 为准，
+消费者需同步工具链和精确模块 tag；历史 0.0.14 的发布状态以 Git tag 为准，
 不把候选或 main 当作已发布版本，也不改变旧 tag 内容。
 
 Thanks to tutorials:
@@ -107,7 +112,7 @@ CI 使用精确的正式 Actions 标签、Caps 0.1.1 和不可变安装，复用
 trait 断言，不添加测试框架或重复诊断统计。该模块没有前端资源部署，本次不增加 COS/CDN 配置。
 
 原有 1 项附加测试调用完整算术/trait 套件；该套件也由 native 与生成 JS 的原入口分别执行。
-当前正式 0.31.0 的完整 CI 结果以本轮 PR 的精确提交为准；本轮只配对工具链，上述源码清理属于此前迁移。
+当前正式 0.32.0 的完整 CI 结果以本轮 PR 的精确提交为准；本轮迁移类型表示，上述 0.30.1 清理属于此前迁移。
 不改变断言、数值容差或质量预算，不把 trait 初始化的惰性转发改成直接引用；
 这些检查不构成完整的数值算法正确性证明，也不代表全部下游已验收。
 
