@@ -13,167 +13,120 @@
         '%ga3-class $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def %ga3-class Ga3
           :examples $ []
-          :schema $ :: 'EnumDef
+          :schema $ quote EnumDef
         '%v3-class $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def %v3-class V3
           :examples $ []
-          :schema $ :: 'EnumDef
+          :schema $ quote EnumDef
         'Ga3 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def Ga3 (impl-traits Ga3Base Ga3MethodsImpl)
           :examples $ []
-          :schema $ :: 'EnumDef
+          :schema $ quote EnumDef
         'Ga3Base $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defenum Ga3
             :ga3 'Number 'Number 'Number 'Number 'Number 'Number 'Number 'Number
           :examples $ []
-          :schema $ :: 'EnumDef
+          :schema $ quote EnumDef
         'Ga3Methods $ %{} 'CodeEntry (:doc |)
           :code $ quote $ deftrait Ga3Methods
-            .add $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
-              :return 'geometric.core/Ga3
-            .as-v3 $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3
-              :return 'geometric.core/V3
-            .as-v3-list $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3
-              :return $ :: 'List 'Number
-            .close $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
-              :return 'Bool
-            .conjugate $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3
-              :return 'geometric.core/Ga3
-            .length $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3
-              :return 'Number
-            .length-square $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3
-              :return 'Number
-            .multiply $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
-              :return 'geometric.core/Ga3
-            .normalize $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3
-              :return 'geometric.core/Ga3
-            .reflect $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
-              :return 'geometric.core/Ga3
-            .scalar? $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3
-              :return 'Bool
-            .sub $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
-              :return 'geometric.core/Ga3
-            .v3? $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/Ga3
-              :return 'Bool
+            .add $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> geometric.core/Ga3)
+            .as-v3 $ quote $ Fn geometric.core/Ga3 (-> geometric.core/V3)
+            .as-v3-list $ quote $ Fn geometric.core/Ga3
+              -> $ List Number
+            .close $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> Bool)
+            .conjugate $ quote $ Fn geometric.core/Ga3 (-> geometric.core/Ga3)
+            .length $ quote $ Fn geometric.core/Ga3 (-> Number)
+            .length-square $ quote $ Fn geometric.core/Ga3 (-> Number)
+            .multiply $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> geometric.core/Ga3)
+            .normalize $ quote $ Fn geometric.core/Ga3 (-> geometric.core/Ga3)
+            .reflect $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> geometric.core/Ga3)
+            .scalar? $ quote $ Fn geometric.core/Ga3 (-> Bool)
+            .sub $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> geometric.core/Ga3)
+            .v3? $ quote $ Fn geometric.core/Ga3 (-> Bool)
           :examples $ []
-          :schema $ :: 'Trait
+          :schema $ quote Trait
         'Ga3MethodsImpl $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defimpl Ga3MethodsImpl Ga3Methods
             .add $ fn (self next)
-              hint-fn $ {} (:return 'geometric.core/Ga3)
-                :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+              hint-fn $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> geometric.core/Ga3
               ga3:add self next
             .as-v3 $ fn (self)
-              hint-fn $ {} (:return 'geometric.core/V3)
-                :args $ [] 'geometric.core/Ga3
+              hint-fn $ Fn geometric.core/Ga3 $ -> geometric.core/V3
               ga3:as-v3 self
             .as-v3-list $ fn (self)
-              hint-fn $ {}
-                :args $ [] 'geometric.core/Ga3
-                :return $ :: 'List 'Number
+              hint-fn $ Fn geometric.core/Ga3 $ -> (List Number)
               ga3:as-v3-list self
             .close $ fn (self next)
-              hint-fn $ {} (:return 'Bool)
-                :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+              hint-fn $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> Bool
               ga3:close? self next
             .conjugate $ fn (self)
-              hint-fn $ {} (:return 'geometric.core/Ga3)
-                :args $ [] 'geometric.core/Ga3
+              hint-fn $ Fn geometric.core/Ga3 $ -> geometric.core/Ga3
               ga3:conjugate self
             .length $ fn (self)
-              hint-fn $ {} (:return 'Number)
-                :args $ [] 'geometric.core/Ga3
+              hint-fn $ Fn geometric.core/Ga3 $ -> Number
               ga3:length self
             .length-square $ fn (self)
-              hint-fn $ {} (:return 'Number)
-                :args $ [] 'geometric.core/Ga3
+              hint-fn $ Fn geometric.core/Ga3 $ -> Number
               ga3:length-square self
             .multiply $ fn (self next)
-              hint-fn $ {} (:return 'geometric.core/Ga3)
-                :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+              hint-fn $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> geometric.core/Ga3
               ga3:multiply self next
             .normalize $ fn (self)
-              hint-fn $ {} (:return 'geometric.core/Ga3)
-                :args $ [] 'geometric.core/Ga3
+              hint-fn $ Fn geometric.core/Ga3 $ -> geometric.core/Ga3
               ga3:normalize self
             .reflect $ fn (self next)
-              hint-fn $ {} (:return 'geometric.core/Ga3)
-                :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+              hint-fn $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> geometric.core/Ga3
               ga3:reflect self next
             .scalar? $ fn (self)
-              hint-fn $ {} (:return 'Bool)
-                :args $ [] 'geometric.core/Ga3
+              hint-fn $ Fn geometric.core/Ga3 $ -> Bool
               ga3:scalar? self
             .sub $ fn (self next)
-              hint-fn $ {} (:return 'geometric.core/Ga3)
-                :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+              hint-fn $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> geometric.core/Ga3
               ga3:sub self next
             .v3? $ fn (self)
-              hint-fn $ {} (:return 'Bool)
-                :args $ [] 'geometric.core/Ga3
+              hint-fn $ Fn geometric.core/Ga3 $ -> Bool
               ga3:v3? self
           :examples $ []
-          :schema $ :: 'Impl
+          :schema $ quote Impl
         'V3 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def V3 (impl-traits V3Base V3MethodsImpl)
           :examples $ []
-          :schema $ :: 'EnumDef
+          :schema $ quote EnumDef
         'V3Base $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defenum V3 (:v3 'Number 'Number 'Number)
           :examples $ []
-          :schema $ :: 'EnumDef
+          :schema $ quote EnumDef
         'V3Methods $ %{} 'CodeEntry (:doc |)
           :code $ quote $ deftrait V3Methods
-            .to-ga3 $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/V3
-              :return 'geometric.core/Ga3
-            .to-list $ :: 'Fn $ {}
-              :args $ [] 'geometric.core/V3
-              :return $ :: 'List 'Number
+            .to-ga3 $ quote $ Fn geometric.core/V3 (-> geometric.core/Ga3)
+            .to-list $ quote $ Fn geometric.core/V3
+              -> $ List Number
           :examples $ []
-          :schema $ :: 'Trait
+          :schema $ quote Trait
         'V3MethodsImpl $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defimpl V3MethodsImpl V3Methods
             .to-ga3 $ fn (self)
-              hint-fn $ {} (:return 'geometric.core/Ga3)
-                :args $ [] 'geometric.core/V3
+              hint-fn $ Fn geometric.core/V3 $ -> geometric.core/Ga3
               ga3:from-v3 self
             .to-list $ fn (self)
-              hint-fn $ {}
-                :args $ [] 'geometric.core/V3
-                :return $ :: 'List 'Number
+              hint-fn $ Fn geometric.core/V3 $ -> (List Number)
               match self $
                 :v3 x y z
                 [] x y z
           :examples $ []
-          :schema $ :: 'Impl
+          :schema $ quote Impl
         'close? $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn close? (x y)
             <
               abs $ - y x
               , 0.000000000000001
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Bool)
-            :args $ [] 'Number 'Number
+          :schema $ quote $ Fn Number Number (-> Bool)
         'ga3 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3 (s x y z xy yz zx xyz)
             Ga3 :ga3 s x y z xy yz zx xyz
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
-            :args $ [] 'Number 'Number 'Number 'Number 'Number 'Number 'Number 'Number
+          :schema $ quote $ Fn Number Number Number Number Number Number Number Number (-> geometric.core/Ga3)
         'ga3:add $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:add (a b)
             match a $
@@ -182,8 +135,7 @@
                 :ga3 bs bx by bz bxy byz bzx bxyz
                 Ga3 :ga3 (&+ as bs) (&+ ax bx) (&+ ay by) (&+ az bz) (&+ axy bxy) (&+ ayz byz) (&+ azx bzx) (&+ axyz bxyz)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
-            :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+          :schema $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> geometric.core/Ga3)
         'ga3:as-v3 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:as-v3 (a)
             match a $
@@ -196,8 +148,7 @@
                 assert "|xyz field is 0" $ close? 0 xyz
                 v3 x y z
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'geometric.core/V3)
-            :args $ [] 'geometric.core/Ga3
+          :schema $ quote $ Fn geometric.core/Ga3 (-> geometric.core/V3)
         'ga3:as-v3-list $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:as-v3-list (a)
             match a $
@@ -210,9 +161,8 @@
                 assert "|xyz field is 0" $ &= 0 xyz
                 [] x y z
           :examples $ []
-          :schema $ :: 'Fn $ {}
-            :args $ [] 'geometric.core/Ga3
-            :return $ :: 'List 'Number
+          :schema $ quote $ Fn geometric.core/Ga3
+            -> $ List Number
         'ga3:close? $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:close? (a b)
             let
@@ -222,24 +172,21 @@
               and (< l e)
                 < (negate e) l
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Bool)
-            :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+          :schema $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> Bool)
         'ga3:conjugate $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:conjugate (a)
             match a $
               :ga3 s x y z xy yz zx xyz
               Ga3 :ga3 s x y z (negate xy) (negate yz) (negate zx) (negate xyz)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
-            :args $ [] 'geometric.core/Ga3
+          :schema $ quote $ Fn geometric.core/Ga3 (-> geometric.core/Ga3)
         'ga3:from-v3 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:from-v3 (v3)
             match v3 $
               :v3 x y z
               Ga3 :ga3 0 x y z 0 0 0 0
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
-            :args $ [] 'geometric.core/V3
+          :schema $ quote $ Fn geometric.core/V3 (-> geometric.core/Ga3)
         'ga3:from-v3-list $ %{} 'CodeEntry
           :doc "|convert from `[] x y z` to Geometric Algebra 3D tuple"
           :code $ quote $ defn ga3:from-v3-list (v3)
@@ -248,27 +195,24 @@
               every? v3 number?
             Ga3 :ga3 0 (&list:nth v3 0) (&list:nth v3 1) (&list:nth v3 2) 0 0 0 0
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
-            :args $ [] $ :: 'List 'Number
+          :schema $ quote $ Fn (List Number) (-> geometric.core/Ga3)
         'ga3:identity $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def ga3:identity
             Ga3 :ga3 1 0 0 0 0 0 0 0
           :examples $ []
-          :schema $ :: 'geometric.core/Ga3
+          :schema $ quote geometric.core/Ga3
         'ga3:length $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:length (a)
             sqrt $ ga3:length-square a
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Number)
-            :args $ [] 'geometric.core/Ga3
+          :schema $ quote $ Fn geometric.core/Ga3 (-> Number)
         'ga3:length-square $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:length-square (a)
             match a $
               :ga3 s x y z xy yz zx xyz
               + (pow s 2) (pow x 2) (pow y 2) (pow z 2) (pow xy 2) (pow yz 2) (pow zx 2) (pow xyz 2)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Number)
-            :args $ [] 'geometric.core/Ga3
+          :schema $ quote $ Fn geometric.core/Ga3 (-> Number)
         'ga3:multiply $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:multiply (a b)
             match a $
@@ -326,16 +270,14 @@
                     next-xyz $ + (&* a:s b:xyz) (&* a:x b:yz) (&* a:y b:zx) (&* a:z b:xy) (&* a:xy b:z) (&* a:yz b:x) (&* a:zx b:y) (&* a:xyz b:s)
                   Ga3 :ga3 next-s next-x next-y next-z next-xy next-yz next-zx next-xyz
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
-            :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+          :schema $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> geometric.core/Ga3)
         'ga3:normalize $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:normalize (a)
             &let
               l $ ga3:length a
               ga3:scale a $ &/ 1 l
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
-            :args $ [] 'geometric.core/Ga3
+          :schema $ quote $ Fn geometric.core/Ga3 (-> geometric.core/Ga3)
         'ga3:reflect $ %{} 'CodeEntry
           :doc "|reflection formula from https://marctenbosch.com/quaternions/#h_13"
           :code $ quote $ defn ga3:reflect (a rotor)
@@ -347,16 +289,14 @@
                   , r0
                 , -1
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
-            :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+          :schema $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> geometric.core/Ga3)
         'ga3:scalar? $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:scalar? (a)
             match a $
               :ga3 s x y z xy yz zx xyz
               and (&= 0 x) (&= 0 y) (&= 0 z) (&= 0 xy) (&= 0 yz) (&= 0 zx) (&= 0 xyz)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Bool)
-            :args $ [] 'geometric.core/Ga3
+          :schema $ quote $ Fn geometric.core/Ga3 (-> Bool)
         'ga3:scale $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:scale (a n)
             assert "|accepts number" $ number? n
@@ -364,8 +304,7 @@
               :ga3 s x y z xy yz zx xyz
               Ga3 :ga3 (&* s n) (&* x n) (&* y n) (&* z n) (&* xy n) (&* yz n) (&* zx n) (&* xyz n)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
-            :args $ [] 'geometric.core/Ga3 'Number
+          :schema $ quote $ Fn geometric.core/Ga3 Number (-> geometric.core/Ga3)
         'ga3:sub $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:sub (a b)
             match a $
@@ -374,26 +313,23 @@
                 :ga3 bs bx by bz bxy byz bzx bxyz
                 Ga3 :ga3 (&- as bs) (&- ax bx) (&- ay by) (&- az bz) (&- axy bxy) (&- ayz byz) (&- azx bzx) (&- axyz bxyz)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'geometric.core/Ga3)
-            :args $ [] 'geometric.core/Ga3 'geometric.core/Ga3
+          :schema $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> geometric.core/Ga3)
         'ga3:v3? $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn ga3:v3? (a)
             match a $
               :ga3 s x y z xy yz zx xyz
               and (&= 0 s) (&= 0 xy) (&= 0 yz) (&= 0 zx) (&= 0 xyz)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Bool)
-            :args $ [] 'geometric.core/Ga3
+          :schema $ quote $ Fn geometric.core/Ga3 (-> Bool)
         'ga3:zero $ %{} 'CodeEntry (:doc |)
           :code $ quote $ def ga3:zero
             Ga3 :ga3 0 0 0 0 0 0 0 0
           :examples $ []
-          :schema $ :: 'geometric.core/Ga3
+          :schema $ quote geometric.core/Ga3
         'v3 $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn v3 (x y z) (V3 :v3 x y z)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'geometric.core/V3)
-            :args $ [] 'Number 'Number 'Number
+          :schema $ quote $ Fn Number Number Number (-> geometric.core/V3)
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns geometric.core
           :require $ geometric.schema :as schema
@@ -406,13 +342,11 @@
         'main! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn main! () (run-tests)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ []
+          :schema $ quote $ Fn (-> Unit)
         'reload! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn reload! () (run-tests) (println |reloaded.)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ []
+          :schema $ quote $ Fn (-> Unit)
         'run-tests $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn run-tests () "|create values"
             let
@@ -484,8 +418,7 @@
                     assert-traits v2 V3Methods
                     is $ .any? (&methods-of v1)
                       fn (method-name)
-                        hint-fn $ {} (:return 'Bool)
-                          :args $ [] 'Dynamic
+                        hint-fn $ Fn Dynamic $ -> Bool
                         &= |.to-ga3 $ str method-name
                     let
                         g1 $ &trait-call V3Methods :to-ga3 v1
@@ -494,19 +427,16 @@
                       assert-traits g2 Ga3Methods
                       is $ .any? (&methods-of g1)
                         fn (method-name)
-                          hint-fn $ {} (:return 'Bool)
-                            :args $ [] 'Dynamic
+                          hint-fn $ Fn Dynamic $ -> Bool
                           &= |.add $ str method-name
                       is $ .any? (&methods-of g1)
                         fn (method-name)
-                          hint-fn $ {} (:return 'Bool)
-                            :args $ [] 'Dynamic
+                          hint-fn $ Fn Dynamic $ -> Bool
                           &= |.multiply $ str method-name
                       is $ &= direct-add $ &trait-call Ga3Methods :add g1 g2
                       is $ &= direct-multiply $ &trait-call Ga3Methods :multiply g1 g2
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ []
+          :schema $ quote $ Fn (-> Unit)
           :tests $ [] $ %{} 'TestEntry (:name |arithmetic-and-traits)
             :code $ quote $ run-tests
             :tags $ #{} :unit
