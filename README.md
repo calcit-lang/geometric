@@ -1,17 +1,16 @@
 ## Geometric Algebra Arithmetic for Calcit
 
-使用者影响：候选模块 **0.0.15** 配对 Calcit CLI / `@calcit/procs` **0.32.0**。
-新类型语法要求成套升级工具链并重新生成 JS；Git tag 发布前仍是候选。
-库保持实验性质，不把本轮升级视为数值算法稳定性或全部下游已验收的承诺。
+使用者影响：候选模块 **0.0.16** 配对正式 Calcit CLI / `@calcit/procs` **0.32.1**。
+消费者需同步工具链并重新生成 JS；仍在 0.32.0 的消费者可保留已发布 0.0.15，旧 tag 不移动。
+候选不代表已有正式 tag；本 PR 不发版或部署。库仍属实验性质，不把升级视为数值算法稳定性或全部下游已验收的承诺。
 
-Candidate module **0.0.15** pairs Calcit and `@calcit/procs` **0.32.0**.
-Update both tools and regenerate JavaScript for the new type syntax. Publication
-is determined by the Git tag. This geometric algebra library remains experimental.
+Candidate module **0.0.16** pairs Calcit and `@calcit/procs` **0.32.1**.
+Update both tools and regenerate JavaScript; the published 0.0.15 remains paired
+with 0.32.0. This candidate is not a published tag. The library stays experimental.
 
-官方 format 迁移了 33 处旧类型写法，34 个定义的语义 schema 保持一致；
-trait 和局部 hint 的表示同步迁移，Ga3/V3 身份、算术公式、惰性转发、原断言和容差不变。
-严格安装、完整 strict、原 1 项附加算术/trait 套件及 native/JS 入口通过。
-未恢复已退役的质量基线，也没有增加强转、适配层或验证脚本。
+本次不修改 Snapshot、Ga3/V3 身份、算术公式、惰性转发、原断言或容差；34 个定义的完整查询视图保持一致。
+保留此前已完成的 0.32 类型语法迁移、严格安装、完整 strict、原附带算术/trait 套件及 native/JS 入口。
+不恢复已退役的质量基线，不增加强转、适配层或验证脚本；一小时 npm 安装门禁保持且无单包例外。
 
 ### 0.30.1 历史源码清理
 
