@@ -24,7 +24,7 @@
           :schema $ quote EnumDef
         'Ga3Base $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defenum Ga3
-            :ga3 'Number 'Number 'Number 'Number 'Number 'Number 'Number 'Number
+            :ga3 Number Number Number Number Number Number Number Number
           :examples $ []
           :schema $ quote EnumDef
         'Ga3Methods $ %{} 'CodeEntry (:doc |)
@@ -93,7 +93,7 @@
           :examples $ []
           :schema $ quote EnumDef
         'V3Base $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ defenum V3 (:v3 'Number 'Number 'Number)
+          :code $ quote $ defenum V3 (:v3 Number Number Number)
           :examples $ []
           :schema $ quote EnumDef
         'V3Methods $ %{} 'CodeEntry (:doc |)
