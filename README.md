@@ -8,7 +8,7 @@ Candidate module **0.0.19** pairs official Calcit and `@calcit/procs` **0.35.1**
 Align both tools and regenerate JavaScript; keep the original exact tag for older toolchains.
 The candidate is not published yet. The library remains experimental.
 
-本次仅同步版本配对，源码快照不变；保持 Ga3/V3 身份、算术公式、惰性转发、原断言与容差。
+本次同步版本配对，并按 0.35.1 的规范格式调整 `Ga3Methods` 和 `V3Methods` 的声明。Ga3/V3 身份、算术公式、惰性转发、原断言与容差保持原样。
 保留完整 strict、原附带算术/trait 套件与 native/JS 入口；不恢复质量基线或放宽预算。
 原开放方法反射结果仍按真实边界处理，不以不完整 union 或强转替代；一小时 npm 包龄门禁保持且无例外。
 
