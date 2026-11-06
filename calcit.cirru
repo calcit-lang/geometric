@@ -29,20 +29,19 @@
           :schema $ quote EnumDef
         'Ga3Methods $ %{} 'CodeEntry (:doc |)
           :code $ quote $ deftrait Ga3Methods
-            .add $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> geometric.core/Ga3)
-            .as-v3 $ quote $ Fn geometric.core/Ga3 (-> geometric.core/V3)
-            .as-v3-list $ quote $ Fn geometric.core/Ga3
-              -> $ List Number
-            .close $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> Bool)
-            .conjugate $ quote $ Fn geometric.core/Ga3 (-> geometric.core/Ga3)
-            .length $ quote $ Fn geometric.core/Ga3 (-> Number)
-            .length-square $ quote $ Fn geometric.core/Ga3 (-> Number)
-            .multiply $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> geometric.core/Ga3)
-            .normalize $ quote $ Fn geometric.core/Ga3 (-> geometric.core/Ga3)
-            .reflect $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> geometric.core/Ga3)
-            .scalar? $ quote $ Fn geometric.core/Ga3 (-> Bool)
-            .sub $ quote $ Fn geometric.core/Ga3 geometric.core/Ga3 (-> geometric.core/Ga3)
-            .v3? $ quote $ Fn geometric.core/Ga3 (-> Bool)
+            .add $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> geometric.core/Ga3
+            .as-v3 $ Fn geometric.core/Ga3 $ -> geometric.core/V3
+            .as-v3-list $ Fn geometric.core/Ga3 $ -> (List Number)
+            .close $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> Bool
+            .conjugate $ Fn geometric.core/Ga3 $ -> geometric.core/Ga3
+            .length $ Fn geometric.core/Ga3 $ -> Number
+            .length-square $ Fn geometric.core/Ga3 $ -> Number
+            .multiply $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> geometric.core/Ga3
+            .normalize $ Fn geometric.core/Ga3 $ -> geometric.core/Ga3
+            .reflect $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> geometric.core/Ga3
+            .scalar? $ Fn geometric.core/Ga3 $ -> Bool
+            .sub $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> geometric.core/Ga3
+            .v3? $ Fn geometric.core/Ga3 $ -> Bool
           :examples $ []
           :schema $ quote Trait
         'Ga3MethodsImpl $ %{} 'CodeEntry (:doc |)
@@ -98,9 +97,8 @@
           :schema $ quote EnumDef
         'V3Methods $ %{} 'CodeEntry (:doc |)
           :code $ quote $ deftrait V3Methods
-            .to-ga3 $ quote $ Fn geometric.core/V3 (-> geometric.core/Ga3)
-            .to-list $ quote $ Fn geometric.core/V3
-              -> $ List Number
+            .to-ga3 $ Fn geometric.core/V3 $ -> geometric.core/Ga3
+            .to-list $ Fn geometric.core/V3 $ -> (List Number)
           :examples $ []
           :schema $ quote Trait
         'V3MethodsImpl $ %{} 'CodeEntry (:doc |)

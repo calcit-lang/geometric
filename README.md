@@ -1,14 +1,14 @@
 ## Geometric Algebra Arithmetic for Calcit
 
-使用者影响：候选模块 **0.0.18** 配对正式 Calcit CLI / `@calcit/procs` **0.34.2**。
+使用者影响：候选模块 **0.0.19** 配对正式 Calcit CLI / `@calcit/procs` **0.35.1**。
 消费者需同步工具链并重新生成 JS；旧工具链的消费者保留原精确 tag，旧 tag 不移动。
 候选不代表已有正式 tag。库仍属实验性质，不把升级视为数值算法稳定性或全部下游已验收的承诺。
 
-Candidate module **0.0.18** pairs official Calcit and `@calcit/procs` **0.34.2**.
+Candidate module **0.0.19** pairs official Calcit and `@calcit/procs` **0.35.1**.
 Align both tools and regenerate JavaScript; keep the original exact tag for older toolchains.
 The candidate is not published yet. The library remains experimental.
 
-本次仅同步版本配对，源码快照不变；保持 Ga3/V3 身份、算术公式、惰性转发、原断言与容差。
+本次同步版本配对，并按 0.35.1 的规范格式调整 `Ga3Methods` 和 `V3Methods` 的声明。Ga3/V3 身份、算术公式、惰性转发、原断言与容差保持原样。
 保留完整 strict、原附带算术/trait 套件与 native/JS 入口；不恢复质量基线或放宽预算。
 原开放方法反射结果仍按真实边界处理，不以不完整 union 或强转替代；一小时 npm 包龄门禁保持且无例外。
 
@@ -111,7 +111,7 @@ CI 使用精确的正式 Actions 标签、Caps 0.1.1 和不可变安装，复用
 trait 断言，不添加测试框架或重复诊断统计。该模块没有前端资源部署，本次不增加 COS/CDN 配置。
 
 原有 1 项附加测试调用完整算术/trait 套件；该套件也由 native 与生成 JS 的原入口分别执行。
-当前 0.34.2 候选的完整 CI 结果以本轮 PR 的精确提交为准；此前的 0.32 类型表示迁移与上述 0.30.1 清理继续保留。
+当前 0.35.1 候选的完整 CI 结果以本轮 PR 的精确提交为准；此前的 0.32 类型表示迁移与上述 0.30.1 清理继续保留。
 不改变断言、数值容差或质量预算，不把 trait 初始化的惰性转发改成直接引用；
 这些检查不构成完整的数值算法正确性证明，也不代表全部下游已验收。
 
