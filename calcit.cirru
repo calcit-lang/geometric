@@ -414,23 +414,14 @@
                       direct-multiply $ ga3:multiply (ga3:from-v3 v1) (ga3:from-v3 v2)
                     assert-traits v1 V3Methods
                     assert-traits v2 V3Methods
-                    is $ .any? (&methods-of v1)
-                      fn (method-name)
-                        hint-fn $ Fn Dynamic $ -> Bool
-                        &= |.to-ga3 $ str method-name
+                    is $ includes? (&methods-of v1) .to-ga3
                     let
                         g1 $ &trait-call V3Methods :to-ga3 v1
                         g2 $ &trait-call V3Methods :to-ga3 v2
                       assert-traits g1 Ga3Methods
                       assert-traits g2 Ga3Methods
-                      is $ .any? (&methods-of g1)
-                        fn (method-name)
-                          hint-fn $ Fn Dynamic $ -> Bool
-                          &= |.add $ str method-name
-                      is $ .any? (&methods-of g1)
-                        fn (method-name)
-                          hint-fn $ Fn Dynamic $ -> Bool
-                          &= |.multiply $ str method-name
+                      is $ includes? (&methods-of g1) .add
+                      is $ includes? (&methods-of g1) .multiply
                       is $ &= direct-add $ &trait-call Ga3Methods :add g1 g2
                       is $ &= direct-multiply $ &trait-call Ga3Methods :multiply g1 g2
           :examples $ []
