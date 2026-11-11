@@ -47,43 +47,43 @@
         'Ga3MethodsImpl $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defimpl Ga3MethodsImpl Ga3Methods
             .add $ fn (self next)
-              hint-fn $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> geometric.core/Ga3
+              hint-fn $ Fn Ga3 Ga3 $ -> Ga3
               ga3:add self next
             .as-v3 $ fn (self)
-              hint-fn $ Fn geometric.core/Ga3 $ -> geometric.core/V3
+              hint-fn $ Fn Ga3 $ -> V3
               ga3:as-v3 self
             .as-v3-list $ fn (self)
-              hint-fn $ Fn geometric.core/Ga3 $ -> (List Number)
+              hint-fn $ Fn Ga3 $ -> (List Number)
               ga3:as-v3-list self
             .close $ fn (self next)
-              hint-fn $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> Bool
+              hint-fn $ Fn Ga3 Ga3 $ -> Bool
               ga3:close? self next
             .conjugate $ fn (self)
-              hint-fn $ Fn geometric.core/Ga3 $ -> geometric.core/Ga3
+              hint-fn $ Fn Ga3 $ -> Ga3
               ga3:conjugate self
             .length $ fn (self)
-              hint-fn $ Fn geometric.core/Ga3 $ -> Number
+              hint-fn $ Fn Ga3 $ -> Number
               ga3:length self
             .length-square $ fn (self)
-              hint-fn $ Fn geometric.core/Ga3 $ -> Number
+              hint-fn $ Fn Ga3 $ -> Number
               ga3:length-square self
             .multiply $ fn (self next)
-              hint-fn $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> geometric.core/Ga3
+              hint-fn $ Fn Ga3 Ga3 $ -> Ga3
               ga3:multiply self next
             .normalize $ fn (self)
-              hint-fn $ Fn geometric.core/Ga3 $ -> geometric.core/Ga3
+              hint-fn $ Fn Ga3 $ -> Ga3
               ga3:normalize self
             .reflect $ fn (self next)
-              hint-fn $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> geometric.core/Ga3
+              hint-fn $ Fn Ga3 Ga3 $ -> Ga3
               ga3:reflect self next
             .scalar? $ fn (self)
-              hint-fn $ Fn geometric.core/Ga3 $ -> Bool
+              hint-fn $ Fn Ga3 $ -> Bool
               ga3:scalar? self
             .sub $ fn (self next)
-              hint-fn $ Fn geometric.core/Ga3 geometric.core/Ga3 $ -> geometric.core/Ga3
+              hint-fn $ Fn Ga3 Ga3 $ -> Ga3
               ga3:sub self next
             .v3? $ fn (self)
-              hint-fn $ Fn geometric.core/Ga3 $ -> Bool
+              hint-fn $ Fn Ga3 $ -> Bool
               ga3:v3? self
           :examples $ []
           :schema $ quote Impl
@@ -104,10 +104,10 @@
         'V3MethodsImpl $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defimpl V3MethodsImpl V3Methods
             .to-ga3 $ fn (self)
-              hint-fn $ Fn geometric.core/V3 $ -> geometric.core/Ga3
+              hint-fn $ Fn V3 $ -> Ga3
               ga3:from-v3 self
             .to-list $ fn (self)
-              hint-fn $ Fn geometric.core/V3 $ -> (List Number)
+              hint-fn $ Fn V3 $ -> (List Number)
               match self $
                 :v3 x y z
                 [] x y z
