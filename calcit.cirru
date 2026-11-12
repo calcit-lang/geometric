@@ -344,7 +344,7 @@
         'reload! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn reload! () (run-tests) (println |reloaded.)
           :examples $ []
-          :schema $ quote $ Fn (-> Unit)
+          :schema $ quote $ Fn (-> Unit) (:features :io)
         'run-tests $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn run-tests () "|create values"
             let
