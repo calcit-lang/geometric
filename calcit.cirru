@@ -19,12 +19,13 @@
           :examples $ []
           :schema $ quote EnumDef
         'Ga3 $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ def Ga3 (impl-traits Ga3Base Ga3MethodsImpl)
+          :code $ quote $ def Ga3 Ga3Base
           :examples $ []
           :schema $ quote EnumDef
         'Ga3Base $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defenum Ga3
             :ga3 Number Number Number Number Number Number Number Number
+            :impls Ga3Methods
           :examples $ []
           :schema $ quote EnumDef
         'Ga3Methods $ %{} 'CodeEntry (:doc |)
@@ -45,7 +46,7 @@
           :examples $ []
           :schema $ quote Trait
         'Ga3MethodsImpl $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ defimpl Ga3MethodsImpl Ga3Methods
+          :code $ quote $ defimpl Ga3Base Ga3Methods
             .add $ fn (self next)
               hint-fn $ Fn Ga3 Ga3 $ -> Ga3
               ga3:add self next
@@ -88,11 +89,11 @@
           :examples $ []
           :schema $ quote Impl
         'V3 $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ def V3 (impl-traits V3Base V3MethodsImpl)
+          :code $ quote $ def V3 V3Base
           :examples $ []
           :schema $ quote EnumDef
         'V3Base $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ defenum V3 (:v3 Number Number Number)
+          :code $ quote $ defenum V3 (:v3 Number Number Number) (:impls V3Methods)
           :examples $ []
           :schema $ quote EnumDef
         'V3Methods $ %{} 'CodeEntry (:doc |)
@@ -102,7 +103,7 @@
           :examples $ []
           :schema $ quote Trait
         'V3MethodsImpl $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ defimpl V3MethodsImpl V3Methods
+          :code $ quote $ defimpl V3Base V3Methods
             .to-ga3 $ fn (self)
               hint-fn $ Fn V3 $ -> Ga3
               ga3:from-v3 self
