@@ -1,10 +1,10 @@
 ## Geometric Algebra Arithmetic for Calcit
 
-使用者影响：当前源码使用正式 Calcit CLI / `@calcit/procs` **0.45.0**。已发布的 **0.0.21** 配对 Calcit 0.44.0。
+使用者影响：当前源码使用正式 Calcit CLI / `@calcit/procs` **0.45.1**。已发布的 **0.0.21** 配对 Calcit 0.44.0。
 消费者需同步工具链并重新生成 JS；旧工具链的消费者保留原精确 tag，旧 tag 不移动。
 候选不代表已有正式 tag。库仍属实验性质，不把升级视为数值算法稳定性或全部下游已验收的承诺。
 
-Current source uses official Calcit and `@calcit/procs` **0.45.0**; the published **0.0.21** tag pairs with Calcit 0.44.0.
+Current source uses official Calcit and `@calcit/procs` **0.45.1**; the published **0.0.21** tag pairs with Calcit 0.44.0.
 Align both tools and regenerate JavaScript; keep the original exact tag for older toolchains.
 The candidate is not published yet. The library remains experimental.
 
