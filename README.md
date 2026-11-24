@@ -1,10 +1,10 @@
 ## Geometric Algebra Arithmetic for Calcit
 
-使用者影响：候选版本 **0.0.21** 使用正式 Calcit CLI / `@calcit/procs` **0.44.0**。已发布的 **0.0.20** 配对 Calcit 0.43.0。
+使用者影响：当前源码使用正式 Calcit CLI / `@calcit/procs` **0.45.0**。已发布的 **0.0.21** 配对 Calcit 0.44.0。
 消费者需同步工具链并重新生成 JS；旧工具链的消费者保留原精确 tag，旧 tag 不移动。
 候选不代表已有正式 tag。库仍属实验性质，不把升级视为数值算法稳定性或全部下游已验收的承诺。
 
-Candidate **0.0.21** uses official Calcit and `@calcit/procs` **0.44.0**; the published **0.0.20** tag pairs with Calcit 0.43.0.
+Current source uses official Calcit and `@calcit/procs` **0.45.0**; the published **0.0.21** tag pairs with Calcit 0.44.0.
 Align both tools and regenerate JavaScript; keep the original exact tag for older toolchains.
 The candidate is not published yet. The library remains experimental.
 
@@ -107,7 +107,7 @@ work, inspect the affected definitions, then apply reviewed changes through
 all-zero quality baseline stays removed; strict compilation and the original
 native/JS arithmetic and trait assertions remain required.
 
-CI 使用精确的正式 Actions 标签、Caps 0.1.1 和不可变安装，复用既有 native/JS 算术与
+CI 使用精确的正式 Actions 标签、Caps 0.1.2 和不可变安装，复用既有 native/JS 算术与
 trait 断言，不添加测试框架或重复诊断统计。该模块没有前端资源部署，本次不增加 COS/CDN 配置。
 
 原有 1 项附加测试调用完整算术/trait 套件；该套件也由 native 与生成 JS 的原入口分别执行。
